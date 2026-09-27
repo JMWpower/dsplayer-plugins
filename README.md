@@ -2,7 +2,7 @@
 
 DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装入口），`packages/` 存放插件包，`icons/` 存放条目图标。
 
-## 当前收录（13 个条目 = 环境 9 + 应用 4）
+## 当前收录（12 个条目 = 环境 8 + 应用 4）
 
 条目带 `category` 字段（2026-09-20 起）：`env`=环境（引擎/运行时，给壳子供能力，默认归类）；`app`=应用（面向完整使用场景：整合包、直播源包、服务包）。市场内按类别过滤，默认展示「环境」。
 
@@ -16,15 +16,14 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | Python 爬虫引擎 | `py` | 1.0.9 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.0.9-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
 | IJK 播放内核 | `ijk` | 1.0.1 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.1.apk` |
-| QJS 爬虫引擎 | `qjs` | 1.0.1 | import | `packages/qjs-1.0.1.apk` |
-| fjs 引擎（dr3 源） | `fjs` | 1.0.0 | import | `packages/fjs-1.0.0.apk` |
+| QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.2 | import | `packages/qjs-1.0.2.apk` |
 | AI 助手界面 | `agent` | 1.1.0 | import | `packages/agent-1.1.0.apk` |
 
 ### 应用（app）
 
 | 条目 | id | 版本 | type | 包 |
 |---|---|---|---|---|
-| 插件整合包 | `bundle` | 1.0.9 | **apk**（系统安装） | `packages/bundle-1.0.9.apk` |
+| 插件整合包 | `bundle` | 1.1.0 | **apk**（系统安装） | `packages/bundle-1.1.0.apk` |
 | IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包） | `packages/iptv-ccsh-1.1.0.json` |
 | 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
 | 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
@@ -34,13 +33,13 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | 条目 | 当前版本 | 要点 |
 |---|---|---|
 | `mpv` | 1.0.2 | libmpv 重编入 DASH（MPD）demuxer（上游构建缺 libxml2 致 `ff_dash_demuxer` 未编入，DASH 源此前须降级 Exo）；内核 1.2.5 → 1.2.6 |
-| `qjs` | 1.0.1 | 根治跨 isolate SIGABRT 闪退——so 回调从进程级全局改 per-context 注册 |
-| `bundle` | 1.0.9 | agent 子插件 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat）；此前 1.0.8 收编 ijk 1.0.0（桥接内核） |
+| `qjs` | 1.0.2 | so 升级（qjs_ultra 异步桥）：**drpy3 源运行时并入本插件，fjs 插件退役下架**（已装用户可卸载）；原生 WebAssembly（wasm3）；新增墙钟超时中断、结构化错误、值转换护栏。ABI 只增不改，旧本体兼容。此前 1.0.1 根治跨 isolate SIGABRT（回调 per-context 注册） |
+| `bundle` | 1.1.0 | 移除 fjs 子插件（drpy3 并入 qjs 1.0.2），全家桶现为 MPV/Python/QJS/Agent 四插件；此前 1.0.9 agent 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat） |
 | `ijk` | 1.0.1 | 1.0.0 首版（DexClassLoader 桥接，CarGuo 修正版 ijkplayer，HTTPS/16K page size）真机播放/切集/连播/三内核切换全通；1.0.1 修 UA 透传——IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达。**必须 APK 直装**（files zip 导入会丢 dex 致本体探测失效） |
 
 各包完整变更说明见 `market.json` 条目的 `changelog` 字段（DsPlayer 详情弹层直接展示）。
 
-图标在 `icons/`（与条目 `icon` 字段对应；fjs 暂与 QJS 共用 JS 图标）。`iptv.png` 为已弃用的旧版图标（被 `iptv2.png` 取代，保留留档）。
+图标在 `icons/`（与条目 `icon` 字段对应；fjs.png 已随条目下架弃用，保留留档）。`iptv.png` 为已弃用的旧版图标（被 `iptv2.png` 取代，保留留档）。
 
 弹幕 API 服务配套用法：服务启动后，DsPlayer 设置 → 播放器 → 弹幕接口 填 `http://127.0.0.1:9321`，播放无自带弹幕的影片即自动按标题匹配（兼容弹弹play 协议）。
 
@@ -82,13 +81,13 @@ GitHub 直连不畅时，任选其一（DsPlayer 内「管理市场 → GitHub �
 
 | 字段 | 必填 | 说明 |
 |---|---|---|
-| `id` | ✓ | 条目唯一身份：binary/runtime 插件 = 包内 plugin.json 的 `name`；内置引擎 = `mpv/py/qjs/fjs/agent`；应用类自定（iptv-ccsh/lx-sync/danmu-api） |
+| `id` | ✓ | 条目唯一身份：binary/runtime 插件 = 包内 plugin.json 的 `name`；内置引擎 = `mpv/py/qjs/agent`；应用类自定（iptv-ccsh/lx-sync/danmu-api） |
 | `name` / `version` / `url` | ✓ | 展示名 / 语义化版本 / 包地址（绝对直链或相对本索引的路径） |
 | `type` | ✓ | `import` / `apk` / `live` / `server`（语义见上表） |
 | `category` | | `env`（默认）/ `app`；未声明归 env |
 | `icon` | | 图标地址（绝对 URL 或相对本索引的路径），未声明回落首字母占位 |
 | `size` / `author` / `desc` / `tags` / `changelog` | | 展示元数据 |
-| `md5` | | 包校验和（32 位 hex）；**声明即强制校验**，不符拒装防篡改。官方 13 包全量声明，可用 `md5sum packages/<包名>` 复核 |
+| `md5` | | 包校验和（32 位 hex）；**声明即强制校验**，不符拒装防篡改。官方 12 包全量声明，可用 `md5sum packages/<包名>` 复核 |
 | `minApp` | | 可选；要求的最低 DsPlayer 版本，不满足时安装按钮置灰 |
 | `pkg` | | 可选；**type=apk 专属**——应用包名。声明后客户端走通用包探测判定已安装（第三方插件零壳子改动接入的关键：不在 DsPlayer 内置插件注册表的 apk 条目必须声明，否则市场 UI 恒判「未安装」） |
 
