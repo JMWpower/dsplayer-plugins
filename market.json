@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-27T09:05:00",
+  "updatedAt": "2026-09-27T10:20:00",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -146,18 +146,18 @@
       "id": "bundle",
       "name": "插件整合包",
       "author": "hjdhnx",
-      "desc": "全家桶安装器（有桌面图标，一键安装）：内置 MPV/Python/QJS/fjs/Agent 五插件 APK + mediaProxy/php 运行时 zip。版本预检：设备已装版本 ≥ 内置版本则跳过，仅补缺口/升级落后项，可与单包共存。",
-      "version": "1.0.9",
+      "desc": "全家桶安装器（有桌面图标，一键安装）：内置 MPV/Python/QJS/Agent 四插件 APK + mediaProxy/php 运行时 zip。版本预检：设备已装版本 ≥ 内置版本则跳过，仅补缺口/升级落后项，可与单包共存。",
+      "version": "1.1.0",
       "type": "apk",
-      "size": 61982781,
-      "url": "packages/bundle-1.0.9.apk",
+      "size": 56940233,
+      "url": "packages/bundle-1.1.0.apk",
       "icon": "icons/bundle.png",
       "tags": [
         "安装器",
         "整合包"
       ],
-      "md5": "e0e2e7dfd0f674029bfb6cf359d94f18",
-      "changelog": "agent 子插件 1.0.0→1.1.0（NextChat v2.15.8 升级 + injectCompat 注入兼容声明）",
+      "md5": "666f8affd6ffe1a156a55715a2a6ecac",
+      "changelog": "移除 fjs 子插件（drpy3 换核 qjs_ultra，qjs 子插件升 1.0.2 承接 drpy3 源）；全家桶现为 MPV/Python/QJS/Agent 四插件。",
       "category": "app"
     },
     {
