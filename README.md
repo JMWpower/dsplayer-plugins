@@ -13,7 +13,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | 媒体代理服务 | `mediaProxy` | 1.1.1 | import（zip） | `packages/mediaProxy-1.1.1.zip` |
 | Node.js 运行时 | `nodejs` | 1.0.0 | import（zip） | `packages/nodejs-1.0.0.zip` |
 | PHP 运行时 | `php` | 1.3.1 | import（zip） | `packages/php-1.3.1.zip` |
-| Python 爬虫引擎 | `py` | 1.0.9 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.0.9-arm64.apk` |
+| Python 爬虫引擎 | `py` | 1.1.0 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.0-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
 | IJK 播放内核 | `ijk` | 1.0.1 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.1.apk` |
 | QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.2 | import | `packages/qjs-1.0.2.apk` |
@@ -34,6 +34,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | 条目 | 当前版本 | 要点 |
 |---|---|---|
 | `mpv` | 1.0.2 | libmpv 重编入 DASH（MPD）demuxer（上游构建缺 libxml2 致 `ff_dash_demuxer` 未编入，DASH 源此前须降级 Exo）；内核 1.2.5 → 1.2.6 |
+| `py` | 1.1.0 | 大响应 callBigFile 通道（AIDL 追加新方法，engine 1.1.0）：源方法响应超 Binder 1MB 回包上限时经 PFD 落宿主临时文件，上限=内存，db 版大列表源不再报错；旧本体不受影响（不主动调用新通道）。抗杀保活配套开关在本体插件页 py 卡片（绑定 BIND_IMPORTANT，激进 ROM 不再冻杀 py 进程），默认关维持后台压权 |
 | `qjs` | 1.0.2 | so 升级（qjs_ultra 异步桥）：**drpy3 源运行时并入本插件，fjs 插件退役下架**（已装用户可卸载）；原生 WebAssembly（wasm3）；新增墙钟超时中断、结构化错误、值转换护栏。ABI 只增不改，旧本体兼容。此前 1.0.1 根治跨 isolate SIGABRT（回调 per-context 注册） |
 | `bundle` | 1.1.0 | 移除 fjs 子插件（drpy3 并入 qjs 1.0.2），全家桶现为 MPV/Python/QJS/Agent 四插件；此前 1.0.9 agent 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat） |
 | `ijk` | 1.0.1 | 1.0.0 首版（DexClassLoader 桥接，CarGuo 修正版 ijkplayer，HTTPS/16K page size）真机播放/切集/连播/三内核切换全通；1.0.1 修 UA 透传——IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达。**必须 APK 直装**（files zip 导入会丢 dex 致本体探测失效） |
