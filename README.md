@@ -27,6 +27,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包） | `packages/iptv-ccsh-1.1.0.json` |
 | 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
 | 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
+| 演示源包 | `demo-sources` | 1.0.0 | **source**（源码包） | `packages/demo-sources-1.0.0.zip` |
 
 ### 引擎类条目版本要点
 
@@ -51,6 +52,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | `apk` | apk | 跳系统安装器直装 | py、bundle、ijk |
 | `live` | JSON（`{"lives":[{name,url,ua,epg}]}`） | 写入直播配置并启用，切直播页生效；**订阅制**（内容指向外部地址时随源自动更新） | iptv-ccsh |
 | `server` | zip（根部须有 `server.json` manifest：`serviceName/workDir/entry/port/healthType/desc`） | 解压到 `sdcard/dsplayer/server/node/`（覆盖式，数据目录保留）+ **自动创建服务配置**（nodejs 运行时启动；服务 id 约定 `svc-mkt-<条目id>`，已存在跳过） | lx-sync、danmu-api |
+| `source` | zip（根部可选 `source.json` manifest：`{"dirs":["dr3","js"]}` 目录白名单，缺省全解压） | 解压到 `sdcard/dsplayer/spider/`——包内顶层目录与本地源扫描目录（`dr2`/`dr3`/`hipy`/`js`）同名直落位，覆盖式不影响包外文件；进对应本地源页自动扫描入库；已装态存 App 安装记录（更新 = 市场版本对比后重装）。**zip 文件名必须 UTF-8 编码**（7-Zip 默认按本地代码页打包中文名会乱码，用 Python zipfile/UTF-8 工具打包） | demo-sources |
 
 `server` 包要求设备已装 `nodejs` 运行时插件；manifest 字段由 DsPlayer 市场安装器消费（见 DsPlayer 仓库 `MarketManager.installServerPackage`）。
 
@@ -81,7 +83,7 @@ GitHub 直连不畅时，任选其一（DsPlayer 内「管理市场 → GitHub �
 
 | 字段 | 必填 | 说明 |
 |---|---|---|
-| `id` | ✓ | 条目唯一身份：binary/runtime 插件 = 包内 plugin.json 的 `name`；内置引擎 = `mpv/py/qjs/agent`；应用类自定（iptv-ccsh/lx-sync/danmu-api） |
+| `id` | ✓ | 条目唯一身份：binary/runtime 插件 = 包内 plugin.json 的 `name`；内置引擎 = `mpv/py/qjs/agent`；应用类自定（iptv-ccsh/lx-sync/danmu-api/demo-sources） |
 | `name` / `version` / `url` | ✓ | 展示名 / 语义化版本 / 包地址（绝对直链或相对本索引的路径） |
 | `type` | ✓ | `import` / `apk` / `live` / `server`（语义见上表） |
 | `category` | | `env`（默认）/ `app`；未声明归 env |

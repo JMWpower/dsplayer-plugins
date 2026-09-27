@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-27T10:20:00",
+  "updatedAt": "2026-09-28T01:30:00",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -213,6 +213,23 @@
         "应用"
       ],
       "icon": "icons/danmu.png"
+    },
+    {
+      "id": "demo-sources",
+      "name": "演示源包",
+      "author": "hjdhnx",
+      "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 12 个文件。更新为整包覆盖式，不影响包外自装源。",
+      "version": "1.0.0",
+      "type": "source",
+      "category": "app",
+      "url": "packages/demo-sources-1.0.0.zip",
+      "size": 1074957,
+      "md5": "e2e184646cf42c0e45642676616e469d",
+      "changelog": "1.0.0：首个版本——dr2/dr3/hipy/js 四类本地源集合。",
+      "tags": [
+        "本地源",
+        "应用"
+      ]
     }
   ]
 }
