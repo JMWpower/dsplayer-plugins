@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-28T01:30:00",
+  "updatedAt": "2026-09-28T02:00:00",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -229,7 +229,8 @@
       "tags": [
         "本地源",
         "应用"
-      ]
+      ],
+      "icon": "icons/demo-sources.png"
     }
   ]
 }
