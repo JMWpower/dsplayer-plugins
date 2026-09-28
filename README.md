@@ -16,7 +16,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | Python 爬虫引擎 | `py` | 1.1.0 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.0-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
 | IJK 播放内核 | `ijk` | 1.0.1 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.1.apk` |
-| FFmpeg 软解 | `ffmpeg` | 1.0.1 | **apk**（系统安装；需本体 v0.6.2+） | `packages/ffmpeg-1.0.1.apk` |
+| FFmpeg 软解 | `ffmpeg` | 1.0.2 | **apk**（系统安装；需本体 v0.6.2+） | `packages/ffmpeg-1.0.2.apk` |
 | QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.3 | import | `packages/qjs-1.0.3.apk` |
 | AI 助手界面 | `agent` | 1.1.0 | import | `packages/agent-1.1.0.apk` |
 

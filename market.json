@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-28T07:56:54.000Z",
+  "updatedAt": "2026-09-28T10:05:00.000Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -237,17 +237,17 @@
       "name": "FFmpeg 软解",
       "author": "hjdhnx",
       "desc": "Exo 内核的 FFmpeg 音视频软解兜底（FongMi media3 fork 版 decoder_ffmpeg：libffmpegJNI + FFmpeg 9.0）：AC3/EAC3/DTS 全家/TrueHD/Atmos 音轨、AV1/AVS2/AVS3/Dolby Vision 视频等硬解不支持的格式自动回落软解，硬解支持仍走硬解。安装后播放自动生效，可在插件页停用。需本体 v0.6.2+（media3 切换 fork 版后生效），apk 直装。",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "type": "apk",
-      "size": 13025713,
-      "url": "packages/ffmpeg-1.0.1.apk",
+      "size": 13025897,
+      "url": "packages/ffmpeg-1.0.2.apk",
       "icon": "icons/ffmpeg.png",
       "tags": [
         "解码"
       ],
-      "md5": "156598375a75012077923fcc12be2dd3",
+      "md5": "3090df5f17641ff30d0f35e59fb51a2d",
       "category": "env",
-      "changelog": "v1.0.1：补载 NDK C++ 运行时 libc++_shared.so（真机实锤：FongMi 编的 libavcodec 等动态依赖它，缺失时 dlopen 直接失败）；v1.0.0 首版——FongMi/media fork（release-1.11.0-fongmi）编出的 decoder_ffmpeg so 载体：音频软解（AC3/EAC3/DTS 全家/TrueHD/Atmos 等）+ 视频软解（H.264/H.265/AV1(dav1d)/VP9/MPEG-4/AVS2/AVS3，Dolby Vision 基础层映射），Exo 硬解不支持格式自动回落"
+      "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。"
     }
   ]
 }
