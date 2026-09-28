@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-27T23:52:11.000Z",
+  "updatedAt": "2026-09-28T02:55:11.000Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -113,17 +113,17 @@
       "name": "QJS 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 JS 爬虫源执行引擎（自研 QuickJS + C 扩展核心）：drpy2（type=3 的 .js 源与 sdcard spider/js 本地源）与 drpy3 新源（声明式/wasm 形态，sdcard spider/dr3）统一由本插件执行——drpy3 源不再需要单独的 fjs 插件。",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "type": "import",
-      "size": 3104199,
-      "url": "packages/qjs-1.0.2.apk",
+      "size": 3108862,
+      "url": "packages/qjs-1.0.3.apk",
       "icon": "icons/qjs.png",
       "tags": [
         "引擎"
       ],
-      "md5": "d035629befe15bb7f4b2fcd2a1057f3d",
+      "md5": "3cc39ec7ef31382c6ce50484f1ab4189",
       "category": "env",
-      "changelog": "v1.0.2：so 升级（qjs_ultra 异步桥）——drpy3 源运行时合并进本插件，drpy3 源不再需要 fjs 插件（fjs 条目已下架，已装用户可卸载）；原生 WebAssembly（wasm3）；新增墙钟超时中断、结构化错误、值转换护栏。dr2 源行为不变、旧本体兼容。"
+      "changelog": "v1.0.3：so 升级（qjs_ultra build-20260928-06341c2）——cheerio 补齐 :gt/:lt 切片（选择器伪类 + 链式方法，外部贡献合入），drpy2/drpy3 源的 HTML 解析选择器更全；ABI 与 1.0.2 一致（66 导出经闸门校验），旧本体兼容，dr2/drpy3 源行为不变。"
     },
     {
       "id": "agent",
