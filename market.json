@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-28T10:05:00.000Z",
+  "updatedAt": "2026-09-28T19:19:19.000Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -218,14 +218,14 @@
       "id": "demo-sources",
       "name": "演示源包",
       "author": "hjdhnx",
-      "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 12 个文件。更新为整包覆盖式，不影响包外自装源。",
-      "version": "1.0.1",
+      "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
+      "version": "1.0.2",
       "type": "source",
       "category": "app",
-      "url": "packages/demo-sources-1.0.1.zip",
-      "size": 1075129,
-      "md5": "05574c9a88c5bc6a76ab2f3ec5551cf5",
-      "changelog": "1.0.1：修复央视频d3 播放花屏——分块 base64 编码的块大小非 3 的倍数，每块边界 2 字节被独立编码致解密输出经网关解码后 TS 错位（+82 字节实证）；块大小改 3 的倍数（0x7FFE），解密输出与 cat 源逐字节等价。",
+      "url": "packages/demo-sources-1.0.2.zip",
+      "size": 1101160,
+      "md5": "cd6829cebb984d19bab493dab7447a54",
+      "changelog": "1.0.2：新增 hipy 本地源「资源管理」——本地音乐库管理（网络优先获取歌词/海报，本地歌词、内置歌词兜底），附带在线直播源合集（咪咕/宫殿/简单直播）。",
       "tags": [
         "本地源",
         "应用"

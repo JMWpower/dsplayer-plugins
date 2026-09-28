@@ -28,7 +28,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包） | `packages/iptv-ccsh-1.1.0.json` |
 | 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
 | 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
-| 演示源包 | `demo-sources` | 1.0.1 | **source**（源码包） | `packages/demo-sources-1.0.1.zip` |
+| 演示源包 | `demo-sources` | 1.0.2 | **source**（源码包） | `packages/demo-sources-1.0.2.zip` |
 
 ### 引擎类条目版本要点
 
@@ -39,7 +39,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | `qjs` | 1.0.3 | so 升级（qjs_ultra build-20260928）：**cheerio 补齐 :gt/:lt 切片**（选择器伪类 + 链式方法，外部贡献），drpy2/drpy3 源 HTML 解析选择器更全。ABI 与 1.0.2 一致（66 导出闸门校验），旧本体兼容。此前 1.0.2 drpy3 源运行时并入本插件（fjs 退役下架）+ 原生 WebAssembly（wasm3）+ 墙钟超时中断/结构化错误/值转换护栏；1.0.1 根治跨 isolate SIGABRT（回调 per-context 注册） |
 | `bundle` | 1.1.0 | 移除 fjs 子插件（drpy3 并入 qjs 1.0.2），全家桶现为 MPV/Python/QJS/Agent 四插件；此前 1.0.9 agent 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat） |
 | `ijk` | 1.0.1 | 1.0.0 首版（DexClassLoader 桥接，CarGuo 修正版 ijkplayer，HTTPS/16K page size）真机播放/切集/连播/三内核切换全通；1.0.1 修 UA 透传——IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达。**必须 APK 直装**（files zip 导入会丢 dex 致本体探测失效） |
-| `ffmpeg` | 1.0.1 | 1.0.0 首版——FongMi/media fork（release-1.11.0-fongmi）编出的 decoder_ffmpeg so 载体：音频软解（AC3/EAC3/DTS 全家/TrueHD/Atmos 等）+ 视频软解（H.264/H.265/AV1/VP9/MPEG-4/AVS2/AVS3，Dolby Vision 基础层映射），为 Exo 内核补第三层解码兜底（硬解不支持自动回落，硬解可用时零开销）；1.0.1 补载 NDK C++ 运行时 libc++_shared.so（真机实锤：FongMi 编的 libavcodec 等动态依赖它，缺失时 dlopen 直接失败）。**需本体 v0.6.2+**（media3 切 fork 版 + FfmpegDecoderLoader 加载链），**必须 APK 直装** |
+| `ffmpeg` | 1.0.2 | 1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体）；1.0.1 补载 NDK C++ 运行时 libc++_shared.so（真机实锤：FongMi 编的 libavcodec 等动态依赖它，缺失时 dlopen 直接失败）；1.0.0 首版——FongMi/media fork（release-1.11.0-fongmi）编出的 decoder_ffmpeg so 载体：音频软解（AC3/EAC3/DTS 全家/TrueHD/Atmos 等）+ 视频软解（H.264/H.265/AV1/VP9/MPEG-4/AVS2/AVS3，Dolby Vision 基础层映射），为 Exo 内核补第三层解码兜底（硬解不支持自动回落，硬解可用时零开销）。**需本体 v0.6.2+**（media3 切 fork 版 + FfmpegDecoderLoader 加载链），**必须 APK 直装** |
 
 各包完整变更说明见 `market.json` 条目的 `changelog` 字段（DsPlayer 详情弹层直接展示）。
 
