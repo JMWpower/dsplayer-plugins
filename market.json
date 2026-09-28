@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-28T19:19:19.000Z",
+  "updatedAt": "2026-09-28T19:38:22.000Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -62,16 +62,16 @@
       "name": "Python 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 Python 爬虫源执行引擎（Chaquopy）：type=3 的 .py 源自动进入点播源列表。运行时组件必须以 APK 形态安装，安装时跳转系统安装器并需「安装未知应用」授权。",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "type": "apk",
-      "size": 17033032,
-      "url": "packages/DsPlayer-Python-plugin-1.1.0-arm64.apk",
+      "size": 17033132,
+      "url": "packages/DsPlayer-Python-plugin-1.1.1-arm64.apk",
       "icon": "icons/py.png",
       "tags": [
         "引擎"
       ],
-      "md5": "86f65f5ca228d30d5152acce56aa90c6",
-      "changelog": "v1.1.0（versionCode 15）：大响应 callBigFile 通道——源方法响应超 Binder 1MB 回包上限时经 PFD 落宿主临时文件，上限=内存（db 版大列表源不再报错），旧本体不受影响自动回落原通道；抗杀保活开关（配套本体插件页开关：绑定 BIND_IMPORTANT，激进 ROM 不再冻杀 py 进程）。",
+      "md5": "f2648e124a80ba30186aaa7d6913fa93",
+      "changelog": "1.1.1 修复 BaseSpider 构造期崩溃：__init__ 不再调用可被子类重写的 self.log（改模块级 _log 直调）——源重写 log 且在 super().__init__() 之后才赋值其引用的属性时（hipy 源「资源管理」实锤），构造中断报 AttributeError。T3 官方基类无此行为，兼容性对齐；上游 drpy-node 已同步修复。1.1.0 大响应 callBigFile 通道 + 抗杀保活开关。",
       "category": "env"
     },
     {
