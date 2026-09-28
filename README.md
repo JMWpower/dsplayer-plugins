@@ -16,6 +16,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | Python 爬虫引擎 | `py` | 1.1.0 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.0-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
 | IJK 播放内核 | `ijk` | 1.0.1 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.1.apk` |
+| FFmpeg 软解 | `ffmpeg` | 1.0.1 | **apk**（系统安装；需本体 v0.6.2+） | `packages/ffmpeg-1.0.1.apk` |
 | QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.3 | import | `packages/qjs-1.0.3.apk` |
 | AI 助手界面 | `agent` | 1.1.0 | import | `packages/agent-1.1.0.apk` |
 
@@ -38,6 +39,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | `qjs` | 1.0.3 | so 升级（qjs_ultra build-20260928）：**cheerio 补齐 :gt/:lt 切片**（选择器伪类 + 链式方法，外部贡献），drpy2/drpy3 源 HTML 解析选择器更全。ABI 与 1.0.2 一致（66 导出闸门校验），旧本体兼容。此前 1.0.2 drpy3 源运行时并入本插件（fjs 退役下架）+ 原生 WebAssembly（wasm3）+ 墙钟超时中断/结构化错误/值转换护栏；1.0.1 根治跨 isolate SIGABRT（回调 per-context 注册） |
 | `bundle` | 1.1.0 | 移除 fjs 子插件（drpy3 并入 qjs 1.0.2），全家桶现为 MPV/Python/QJS/Agent 四插件；此前 1.0.9 agent 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat） |
 | `ijk` | 1.0.1 | 1.0.0 首版（DexClassLoader 桥接，CarGuo 修正版 ijkplayer，HTTPS/16K page size）真机播放/切集/连播/三内核切换全通；1.0.1 修 UA 透传——IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达。**必须 APK 直装**（files zip 导入会丢 dex 致本体探测失效） |
+| `ffmpeg` | 1.0.1 | 1.0.0 首版——FongMi/media fork（release-1.11.0-fongmi）编出的 decoder_ffmpeg so 载体：音频软解（AC3/EAC3/DTS 全家/TrueHD/Atmos 等）+ 视频软解（H.264/H.265/AV1/VP9/MPEG-4/AVS2/AVS3，Dolby Vision 基础层映射），为 Exo 内核补第三层解码兜底（硬解不支持自动回落，硬解可用时零开销）；1.0.1 补载 NDK C++ 运行时 libc++_shared.so（真机实锤：FongMi 编的 libavcodec 等动态依赖它，缺失时 dlopen 直接失败）。**需本体 v0.6.2+**（media3 切 fork 版 + FfmpegDecoderLoader 加载链），**必须 APK 直装** |
 
 各包完整变更说明见 `market.json` 条目的 `changelog` 字段（DsPlayer 详情弹层直接展示）。
 
@@ -50,7 +52,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | type | 包体 | 安装动作 | 典型条目 |
 |---|---|---|---|
 | `import` | zip / apk | 应用内静默导入（组件落应用内目录） | 引擎/运行时类 |
-| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk |
+| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk、ffmpeg |
 | `live` | JSON（`{"lives":[{name,url,ua,epg}]}`） | 写入直播配置并启用，切直播页生效；**订阅制**（内容指向外部地址时随源自动更新） | iptv-ccsh |
 | `server` | zip（根部须有 `server.json` manifest：`serviceName/workDir/entry/port/healthType/desc`） | 解压到 `sdcard/dsplayer/server/node/`（覆盖式，数据目录保留）+ **自动创建服务配置**（nodejs 运行时启动；服务 id 约定 `svc-mkt-<条目id>`，已存在跳过） | lx-sync、danmu-api |
 | `source` | zip（根部可选 `source.json` manifest：`{"dirs":["dr3","js"]}` 目录白名单，缺省全解压） | 解压到 `sdcard/dsplayer/spider/`——包内顶层目录与本地源扫描目录（`dr2`/`dr3`/`hipy`/`js`）同名直落位，覆盖式不影响包外文件；进对应本地源页自动扫描入库；已装态存 App 安装记录（更新 = 市场版本对比后重装）。**zip 文件名必须 UTF-8 编码**（7-Zip 默认按本地代码页打包中文名会乱码，用 Python zipfile/UTF-8 工具打包） | demo-sources |
