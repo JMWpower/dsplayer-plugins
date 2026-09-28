@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-28T19:38:22.000Z",
+  "updatedAt": "2026-09-28T20:28:13.000Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -62,16 +62,16 @@
       "name": "Python 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 Python 爬虫源执行引擎（Chaquopy）：type=3 的 .py 源自动进入点播源列表。运行时组件必须以 APK 形态安装，安装时跳转系统安装器并需「安装未知应用」授权。",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "type": "apk",
-      "size": 17033132,
-      "url": "packages/DsPlayer-Python-plugin-1.1.1-arm64.apk",
+      "size": 17034508,
+      "url": "packages/DsPlayer-Python-plugin-1.1.2-arm64.apk",
       "icon": "icons/py.png",
       "tags": [
         "引擎"
       ],
-      "md5": "f2648e124a80ba30186aaa7d6913fa93",
-      "changelog": "1.1.1 修复 BaseSpider 构造期崩溃：__init__ 不再调用可被子类重写的 self.log（改模块级 _log 直调）——源重写 log 且在 super().__init__() 之后才赋值其引用的属性时（hipy 源「资源管理」实锤），构造中断报 AttributeError。T3 官方基类无此行为，兼容性对齐；上游 drpy-node 已同步修复。1.1.0 大响应 callBigFile 通道 + 抗杀保活开关。",
+      "md5": "2c07b575a00aa38c6fa4fdde1fc32285",
+      "changelog": "1.1.2 并发与自愈：同源长任务占锁时后续调用 10s 快速报忙（不再 30s 长队堆积）；源实例创建移出全局锁（新源加载不堵其他源）；修复 unloadSource 逐出通道自设计起静默空转（模块对象上调实例方法恒失败被吞）；配套本体（超时自动换实例 + 分发池 8 线程）后，一个源失控不再拖累其他源，且失控源超时后秒级自愈恢复。1.1.1 构造期 log 虚分发修复；1.1.0 大响应通道 + 抗杀保活。",
       "category": "env"
     },
     {
@@ -219,13 +219,13 @@
       "name": "演示源包",
       "author": "hjdhnx",
       "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "type": "source",
       "category": "app",
-      "url": "packages/demo-sources-1.0.2.zip",
-      "size": 1101160,
-      "md5": "cd6829cebb984d19bab493dab7447a54",
-      "changelog": "1.0.2：新增 hipy 本地源「资源管理」——本地音乐库管理（网络优先获取歌词/海报，本地歌词、内置歌词兜底），附带在线直播源合集（咪咕/宫殿/简单直播）。",
+      "url": "packages/demo-sources-1.0.3.zip",
+      "size": 1101602,
+      "md5": "96388b0520b2ddf7814c3a285d1589b1",
+      "changelog": "1.0.3：修复「资源管理」源两类超时——①「最近添加」每次进分类对全部根路径（含整盘 /storage/emulated/0/）做深度 2 全量重扫且无缓存，真机必超引擎 30s 预算：剔出整盘根 + 60s 缓存（首拉秒级，重进秒开）；②直播列表 3 源串行拉取单请求 15s 最坏 45s 超预算：收紧到 8s/6s（有 600s 缓存）；③搜索同改索引化（剥整盘根 + 120s 缓存）。需搭配 py 插件 1.1.2（实例锁带上限 + 超时自动换实例）效果最佳。",
       "tags": [
         "本地源",
         "应用"
