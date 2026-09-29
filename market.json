@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-29 18:46:39",
+  "updatedAt": "2026-09-29 19:58:56",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -219,13 +219,13 @@
       "name": "演示源包",
       "author": "hjdhnx",
       "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集+文本直通预览）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "type": "source",
       "category": "app",
-      "url": "packages/demo-sources-1.1.0.zip",
-      "size": 1105900,
-      "md5": "40704add6fdeabb1d6311c3328f1c4a6",
-      "changelog": "1.1.0：「资源管理」文本类文件直通预览——py/js/md/html/pdf/log/lrc 等点击直开壳子预览页（代码长文本/Markdown/WebView/PdfRenderer 按页渲染），不再进详情页报「没有可播放的线路」；列表/搜索/最近三层全声明，txt/json/m3u 播放列表语义不变；GBK 编码自动探测，超大文本截断保护。⚠️ 需搭配含文本预览能力的新版 DsPlayer 本体（旧本体显示 JSON 容错页不崩）。1.0.9：资源管理元数据联网匹配收敛为头部总开关 AUTO_MATCH_LRC_POSTER（默认关，零联网）。",
+      "url": "packages/demo-sources-1.1.1.zip",
+      "size": 1106541,
+      "md5": "70e33f468c4be44e348196df1c31d510",
+      "changelog": "1.1.1：「资源管理」在线直播修复——①直播列表中文乱码根修（requests 对无 charset 响应按 latin1 解码，改字节级 UTF-8→GB18030→latin1 探测链，好用直播等 UTF-8 列表恢复中文）；②直播源拉取加 10s 总预算（自定义 UA 段与自动适配段共享死线，单请求超时取剩余秒数，超预算即停）。1.1.0：文本类文件直通预览（需新版 DsPlayer 本体）。",
       "tags": [
         "本地源",
         "应用"
