@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-29 15:04:54",
+  "updatedAt": "2026-09-29 15:18:16",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -219,13 +219,13 @@
       "name": "演示源包",
       "author": "hjdhnx",
       "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "type": "source",
       "category": "app",
-      "url": "packages/demo-sources-1.0.8.zip",
-      "size": 1104296,
-      "md5": "fe179d3119bd7baebdc2f01c543da401",
-      "changelog": "1.0.8：「资源管理」音乐连播提速——歌词获取改为 本地.lrc→内嵌→网络双源并行（原网络四级串行全败最坏 50s+ 阻塞 play 响应，点开迟迟不进音乐播放器）；歌词/海报网络结果持久缓存落盘（py 插件进程重启不再全量慢搜）；剔除误打包的 __pycache__ 死重。",
+      "url": "packages/demo-sources-1.0.9.zip",
+      "size": 1104498,
+      "md5": "7a63282435b42a3db5d0b909006aee5e",
+      "changelog": "1.0.9：「资源管理」性能定稿（用户拍板）——新增头部总开关 AUTO_MATCH_LRC_POSTER（默认关）：详情与播放关键路径零联网，歌词仅取本地 .lrc/内嵌、海报用内置图标（stub 实测连播详情 3ms/播放 2ms）；置 True 才联网搜歌词海报（本地→内嵌→网易云+QQ 双源并行顺序不变）。1.0.8：歌词网络搜索由四级串行（最坏 50s+ 阻塞起播）改并行+结果持久缓存落盘。两版均剔除误打包的 __pycache__ 死重。",
       "tags": [
         "本地源",
         "应用"
