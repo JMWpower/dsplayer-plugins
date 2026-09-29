@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-29T21:17:25",
+  "updatedAt": "2026-09-30T02:28:23",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -248,6 +248,25 @@
       "md5": "3090df5f17641ff30d0f35e59fb51a2d",
       "category": "env",
       "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。"
+    },
+    {
+      "id": "idmplus",
+      "name": "IDM+ 下载器（1DM+）",
+      "author": "inventiv",
+      "desc": "Android 多线程下载管理器（1DM+/IDM+ 18.2 CN 汉化版，独立桌面应用）：多线程分段加速、断点续传、剪贴板/浏览器嗅探抓取媒体直链，适合大文件与视频下载。与 DsPlayer 无进程耦合，纯第三方应用直装（声明 pkg 包名，可感知系统侧卸载）。大体积包走 GitHub Release 资产分发，客户端经加速代理拉取后跳系统安装器安装。",
+      "version": "18.2",
+      "type": "apk",
+      "category": "app",
+      "pkg": "idm.internet.download.manager.plus",
+      "size": 56815021,
+      "url": "https://github.com/hjdhnx/dsplayer-plugin/releases/download/idmplus-18.2/idmplus-18.2-CN.apk",
+      "icon": "icons/idmplus.png",
+      "tags": [
+        "下载",
+        "应用"
+      ],
+      "md5": "eaa6a2e119ffb38acb4ff44e4e92247e",
+      "changelog": "首录：IDM+ 18.2（versionCode 30249）CN 汉化版。包体 54MB，超出 packages/ 常规体量，首个走 GitHub Release 分发的条目（绝对 URL 直链，客户端 GitHub 加速代理兼容已验证）。"
     }
   ]
 }

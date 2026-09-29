@@ -2,7 +2,7 @@
 
 DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装入口），`packages/` 存放插件包，`icons/` 存放条目图标。
 
-## 当前收录（14 个条目 = 环境 9 + 应用 5）
+## 当前收录（15 个条目 = 环境 9 + 应用 6）
 
 条目带 `category` 字段（2026-09-20 起）：`env`=环境（引擎/运行时，给壳子供能力，默认归类）；`app`=应用（面向完整使用场景：整合包、直播源包、服务包）。市场内按类别过滤，默认展示「环境」。
 
@@ -29,6 +29,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
 | 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
 | 演示源包 | `demo-sources` | 1.1.3 | **source**（源码包） | `packages/demo-sources-1.1.3.zip` |
+| IDM+ 下载器（1DM+） | `idmplus` | 18.2 | **apk**（系统安装；Release 分发） | `releases/download/idmplus-18.2/idmplus-18.2-CN.apk` |
 
 ### 引擎类条目版本要点
 
@@ -52,12 +53,14 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | type | 包体 | 安装动作 | 典型条目 |
 |---|---|---|---|
 | `import` | zip / apk | 应用内静默导入（组件落应用内目录） | 引擎/运行时类 |
-| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk、ffmpeg |
+| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk、ffmpeg、idmplus |
 | `live` | JSON（`{"lives":[{name,url,ua,epg}]}`） | 写入直播配置并启用，切直播页生效；**订阅制**（内容指向外部地址时随源自动更新） | iptv-ccsh |
 | `server` | zip（根部须有 `server.json` manifest：`serviceName/workDir/entry/port/healthType/desc`） | 解压到 `sdcard/dsplayer/server/node/`（覆盖式，数据目录保留）+ **自动创建服务配置**（nodejs 运行时启动；服务 id 约定 `svc-mkt-<条目id>`，已存在跳过） | lx-sync、danmu-api |
 | `source` | zip（根部可选 `source.json` manifest：`{"dirs":["dr3","js"]}` 目录白名单，缺省全解压） | 解压到 `sdcard/dsplayer/spider/`——包内顶层目录与本地源扫描目录（`dr2`/`dr3`/`hipy`/`js`）同名直落位，覆盖式不影响包外文件；进对应本地源页自动扫描入库；已装态存 App 安装记录（更新 = 市场版本对比后重装）。**zip 文件名必须 UTF-8 编码**（7-Zip 默认按本地代码页打包中文名会乱码，用 Python zipfile/UTF-8 工具打包） | demo-sources |
 
 `server` 包要求设备已装 `nodejs` 运行时插件；manifest 字段由 DsPlayer 市场安装器消费（见 DsPlayer 仓库 `MarketManager.installServerPackage`）。
+
+大体积 APK（50MB 量级及以上）可不进 `packages/`，改发 GitHub Release 分发：tag 约定 `<id>-<version>`（升版本发新 tag，同名资产不覆盖——代理 CDN 缓存纪律同 packages/），asset 文件名避开 `+`/中文等需 URL 编码字符，条目 `url` 写**绝对直链**——客户端 `resolveMarketUrl` 对 `https://` 原样直通、`applyGithubProxy` 对 github.com 域自动套加速代理。首个样例 `idmplus`。
 
 ## 使用
 
