@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-29 11:04:45",
+  "updatedAt": "2026-09-29 11:19:56",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -219,13 +219,13 @@
       "name": "演示源包",
       "author": "hjdhnx",
       "desc": "本地源码集合包（应用类）：安装后解压到 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "type": "source",
       "category": "app",
-      "url": "packages/demo-sources-1.0.6.zip",
-      "size": 1161041,
-      "md5": "12729facdc9d18c98c1df72d232bedb3",
-      "changelog": "1.0.6：「资源管理」源图片连播详情新增第二条线路「全部连看」——全部图片串成一个 pics:// 多图载荷，看图器一话内连续滚动，不用挨张点选集；原「图片浏览」逐张线路保留。需删除本地源重新安装本包（或手动更新 sdcard 源文件）后生效。",
+      "url": "packages/demo-sources-1.0.7.zip",
+      "size": 1161130,
+      "md5": "02f22dc7cbeb1be9de661f70c5087594",
+      "changelog": "1.0.7：「资源管理」修复全部连看整话载荷——pics:// 前缀只出现在段首一次（此前每段重复带前缀，第二张起被当路径加载失败）；需较新本体（漫画阅读器已加段前缀剥离容错与滑动翻话修复）。",
       "tags": [
         "本地源",
         "应用"
