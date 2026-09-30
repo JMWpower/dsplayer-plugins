@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-30T13:18:31",
+  "updatedAt": "2026-09-30T16:50:23",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -62,16 +62,16 @@
       "name": "Python 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 Python 爬虫源执行引擎（Chaquopy）：type=3 的 .py 源自动进入点播源列表。运行时组件必须以 APK 形态安装，安装时跳转系统安装器并需「安装未知应用」授权。",
-      "version": "1.1.3",
+      "version": "1.1.4",
       "type": "apk",
-      "size": 17034608,
-      "url": "packages/DsPlayer-Python-plugin-1.1.3-arm64.apk",
+      "size": 17036516,
+      "url": "packages/DsPlayer-Python-plugin-1.1.4-arm64.apk",
       "icon": "icons/py.png",
       "tags": [
         "引擎"
       ],
-      "md5": "46984ba9dd1c5c0c9c6f24d19ae0e2b5",
-      "changelog": "1.1.3 恢复插件存储读权限（Manifest 此前仅声明 INTERNET）：文件浏览器式本地源（资源管理.py 等）在插件进程内列目录/读文件必需——无权限时对他人属主文件 stat 全部 EACCES，目录恒 0 项。补 READ_EXTERNAL_STORAGE + MANAGE_EXTERNAL_STORAGE + requestLegacyExternalStorage（仅读；写删约束仍由 fs_guard + 无 WRITE 权限承载），装机后需授予「文件/存储」权限。1.1.2 并发与自愈批次不变。",
+      "md5": "83cd008f096fe96058289565bdd444eb",
+      "changelog": "1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 代码片段，stdout/stderr 捕获进 envelope 全量走 fd 二通道（无 Binder 1MB 上限），work_dir 进 sys.path[0] 并临时 chdir（同目录模块可 import），base.spider/pip 预装包与源加载同环境可用；脚本内给 _result 赋值 → 控制台 ⇒ 行显示。配套本体「编程调试」页（我的页→编程调试：workspace 工作区 js/php/py 运行沙盒）。旧本体不受影响（新事务码仅新本体调用）。1.1.3 存储读权限修复不变。",
       "category": "env"
     },
     {
