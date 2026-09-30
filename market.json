@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-30T02:28:23",
+  "updatedAt": "2026-09-30T09:12:09",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -113,17 +113,17 @@
       "name": "QJS 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 JS 爬虫源执行引擎（自研 QuickJS + C 扩展核心）：drpy2（type=3 的 .js 源与 sdcard spider/js 本地源）与 drpy3 新源（声明式/wasm 形态，sdcard spider/dr3）统一由本插件执行——drpy3 源不再需要单独的 fjs 插件。",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "type": "import",
-      "size": 3108862,
-      "url": "packages/qjs-1.0.3.apk",
+      "size": 3109094,
+      "url": "packages/qjs-1.0.4.apk",
       "icon": "icons/qjs.png",
       "tags": [
         "引擎"
       ],
-      "md5": "3cc39ec7ef31382c6ce50484f1ab4189",
+      "md5": "9dd543fd52a337e8fed2b8aba31c5fea",
       "category": "env",
-      "changelog": "v1.0.3：so 升级（qjs_ultra build-20260928-06341c2）——cheerio 补齐 :gt/:lt 切片（选择器伪类 + 链式方法，外部贡献合入），drpy2/drpy3 源的 HTML 解析选择器更全；ABI 与 1.0.2 一致（66 导出经闸门校验），旧本体兼容，dr2/drpy3 源行为不变。"
+      "changelog": "1.0.4：so 升级（qjs_ultra build-20260930-b221bd5）——根修源码模式模块装载的随机假语法错误（quickjs 契约要求 JS_Eval 输入以 NUL 结尾，此前缺终结符导致 lexer 读穿缓冲区把相邻堆字节当源码解析，dr3 源装载高频报 SyntaxError 的根因）。ABI 与 1.0.3 一致（66 导出闸门校验），旧本体兼容。"
     },
     {
       "id": "agent",
