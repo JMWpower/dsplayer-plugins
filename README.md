@@ -28,7 +28,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包） | `packages/iptv-ccsh-1.1.0.json` |
 | 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
 | 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
-| 演示源包 | `demo-sources` | 1.1.5 | **source**（源码包） | `packages/demo-sources-1.1.5.zip` |
+| 演示源包 | `demo-sources` | 1.1.6 | **source**（源码包） | `packages/demo-sources-1.1.6.zip` |
 | IDM+ 下载器（1DM+） | `idmplus` | 18.2 | **apk**（系统安装；Release 分发） | `releases/download/idmplus-18.2/idmplus-18.2-CN.apk` |
 
 ### 引擎类条目版本要点
