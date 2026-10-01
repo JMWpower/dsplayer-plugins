@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-09-30T16:50:23",
+  "updatedAt": "2026-10-01T12:27:12Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -113,17 +113,17 @@
       "name": "QJS 爬虫引擎",
       "author": "hjdhnx",
       "desc": "本地 JS 爬虫源执行引擎（自研 QuickJS + C 扩展核心）：drpy2（type=3 的 .js 源与 sdcard spider/js 本地源）与 drpy3 新源（声明式/wasm 形态，sdcard spider/dr3）统一由本插件执行——drpy3 源不再需要单独的 fjs 插件。",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "type": "import",
-      "size": 3109094,
-      "url": "packages/qjs-1.0.4.apk",
+      "size": 3109106,
+      "url": "packages/qjs-1.0.5.apk",
       "icon": "icons/qjs.png",
       "tags": [
         "引擎"
       ],
-      "md5": "9dd543fd52a337e8fed2b8aba31c5fea",
+      "md5": "3edbcac19014867f501168e4f267284a",
       "category": "env",
-      "changelog": "1.0.4：so 升级（qjs_ultra build-20260930-b221bd5）——根修源码模式模块装载的随机假语法错误（quickjs 契约要求 JS_Eval 输入以 NUL 结尾，此前缺终结符导致 lexer 读穿缓冲区把相邻堆字节当源码解析，dr3 源装载高频报 SyntaxError 的根因）。ABI 与 1.0.3 一致（66 导出闸门校验），旧本体兼容。"
+      "changelog": "qjs_update_stack_top：isolate 线程迁移假 stack overflow 根治（dr3 引擎 worker 化前提；顺带根治 dr2 偶发假爆栈）。需 DsPlayer 0.7.6+ 配合。"
     },
     {
       "id": "agent",
