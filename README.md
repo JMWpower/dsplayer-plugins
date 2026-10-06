@@ -12,7 +12,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 |---|---|---|---|---|
 | 媒体代理服务 | `mediaProxy` | 1.1.1 | import（zip） | `packages/mediaProxy-1.1.1.zip` |
 | Node.js 运行时 | `nodejs` | 1.0.0 | import（zip） | `packages/nodejs-1.0.0.zip` |
-| PHP 运行时 | `php` | 1.3.1 | import（zip） | `packages/php-1.3.1.zip` |
+| PHP 运行时 | `php` | 1.3.2 | import（zip） | `packages/php-1.3.2.zip` |
 | Python 运行时 | `python` | 1.0.2 | import（zip） | `packages/python-1.0.2.zip` |
 | Python 爬虫引擎 | `py` | 1.1.4 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.4-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
@@ -37,6 +37,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 
 | 条目 | 当前版本 | 要点 |
 |---|---|---|
+| `php` | 1.3.2 | 1.3.2 t4_demo BaseSpider 代理统一：`getProxyUrl()` 拿本源代理基址（php -S 通道 run() 自感知自身脚本 `?do=proxy&` 端点；drpyS 桥通道接服务层 env 注入）+ `localProxy($params)` 钩子与 `do=proxy` 分发（五元组契约直出，空图透明 GIF 兜底）——php 源代理写法与其他引擎统一，配套壳内《源本地代理指南》。已装旧版：服务页「示例」重释放 t4_demo 壳文件后重启 T4-PHP 服务生效（自带 lib/spider.php 改过的不覆盖）。drpyS 侧配套改动在 drpy-node 仓（_bridge.php env 注入 + php.js methodMapping） |
 | `python` | 1.0.2 | CPython 3.12.15（musl）独立进程运行时，对齐 nodejs/php 服务形态。插件卡专属「依赖管理」（pip 装卸/刷新/搜索/二次确认）+「爬虫一键装」九件套。**1.0.2 鸿蒙 4.2 兼容两连修**：TMPDIR/HOME 注入插件内可写目录（部分 ROM 无 HOME 无 /tmp，pip 报 No usable temporary directory）；musl 平台探测 spawn 失败防御（部分 ROM fork/exec 受限报 /lib/ld-musl ENOENT 整包失败，现回落伪造标签照常装 musllinux wheel）。1.0.1 pip 平台标签修复（musllinux wheel 识别，lxml/pycryptodome 等 C 扩展免编译直装）。内置 DNS shim + CA + py.sh wrapper。需 DsPlayer 0.8.5+。fastapi 不可用（pydantic-core 无 musl wheel），Flask/标准库可用 |
 | `mpv` | 1.0.2 | libmpv 重编入 DASH（MPD）demuxer（上游构建缺 libxml2 致 `ff_dash_demuxer` 未编入，DASH 源此前须降级 Exo）；内核 1.2.5 → 1.2.6 |
 | `py` | 1.1.4 | 1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 片段，stdout/stderr 走 fd 二通道无 Binder 上限，work_dir 进 sys.path[0] 并临时 chdir，base.spider/pip 预装同源环境；`_result` 赋值 → 控制台 ⇒ 行。配套本体「编程调试」页；旧本体不受影响。1.1.3 恢复插件存储读权限（Manifest 此前仅 INTERNET）：文件浏览器式本地源（资源管理.py 等）在**插件进程**内列目录/读文件必需——无权限时对他人属主文件 stat 全 EACCES、目录恒 0 项；补 READ + MANAGE_EXTERNAL_STORAGE + requestLegacyExternalStorage（**仅读**，写删约束仍由 fs_guard + 无 WRITE 承载），装机后需授予「文件/存储」权限（应用详情→权限）。1.1.2 并发与自愈：同源长任务占锁 10s 快速报忙；源实例创建移出全局锁；修复 unloadSource 逐出通道静默空转；配套本体超时自动换实例 + 分发池 8 线程。1.1.1 修 BaseSpider 构造期崩溃（`__init__` 不再调用可被子类重写的 `self.log`，改模块级 `_log` 直调——hipy 源「资源管理」AttributeError 实锤，T3 官方基类对齐，上游 drpy-node 已同步修）。1.1.0 大响应 callBigFile 通道 + 抗杀保活开关（插件页 py 卡片，BIND_IMPORTANT，默认关） |同源长任务占锁时后续调用 10s 快速报忙（不再 30s 长队堆积）；源实例创建移出全局锁（新源首次加载不堵其他源）；修复 unloadSource 逐出通道自设计起静默空转；配套本体 v0.7.2+ debug（超时自动换实例 + 分发池 8 线程）后一个源失控不拖累其他源、失控源超时后秒级自愈。1.1.1 修 BaseSpider 构造期崩溃——`__init__` 不再调用可被子类重写的 `self.log`（改模块级 `_log` 直调）：源重写 log 且在 `super().__init__()` 之后才赋值其引用的属性时（hipy 源「资源管理」实锤 AttributeError），构造中断实例残废；T3 官方基类构造期不调 log，兼容性对齐，上游 drpy-node 已同步修。1.1.0 大响应 callBigFile 通道（AIDL 追加新方法，engine 1.1.0）+ 抗杀保活开关（插件页 py 卡片，BIND_IMPORTANT，默认关） |

@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-07T05:25:00Z",
+   "updatedAt": "2026-10-07T07:45:00Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -43,18 +43,18 @@
          "id": "php",
          "name": "PHP 运行时",
          "author": "hjdhnx",
-         "desc": "PHP 7 运行时（Android arm64 静态单文件，无动态库依赖）+ t4_demo 站点源种子（T4-PHP 预置导入时释放到 sdcard/dsplayer/server/php/t4_demo，docroot 指 sdcard 可加改源）。供「服务」页引用：drpys 的 php 桥（PHP_PATH）与 T4-PHP 站点服务均引用此包。覆盖安装替换旧 PHP 8 包，二者不共存。",
-         "version": "1.3.1",
+         "desc": "PHP 7 运行时（Android arm64 静态单文件，无动态库依赖）+ t4_demo 站点源种子（T4-PHP 预置导入时释放到 sdcard/dsplayer/server/php/t4_demo，docroot 指 sdcard 可加改源）。供「服务」页引用：drpys 的 php 桥（PHP_PATH）与 T4-PHP 站点服务均引用此包。1.3.2 起 t4_demo BaseSpider 内置源代理能力（getProxyUrl()/localProxy），php 源写法与其他引擎统一。覆盖安装替换旧 PHP 8 包，二者不共存。",
+         "version": "1.3.2",
          "type": "import",
-         "size": 9731838,
-         "url": "packages/php-1.3.1.zip",
+         "size": 9733361,
+         "url": "packages/php-1.3.2.zip",
          "icon": "icons/php.png",
          "tags": [
             "运行时",
             "服务"
          ],
-         "md5": "85cfbe54c329b9dd7c299aa2b3cda120",
-         "changelog": "v1.3.1：控制台页「已加载扩展」展开显示具体名单；t4_demo/php/ 定位修正——它是 web 服务脚本目录（自定义解析、IPTV 转发等），不再是源：不进 config.php 源列表，改为控制台首页单独列出各脚本服务地址。已装 1.3.0 的用户：服务页点「示例」升级壳文件后重启 T4-PHP 服务生效。",
+         "md5": "92a4157b9418a4bdf1c5e7bad2c3306b",
+         "changelog": "v1.3.2：t4_demo BaseSpider 代理统一——getProxyUrl() 拿本源代理基址（php -S 通道自感知自身脚本端点 ?do=proxy&，drpyS 桥通道接服务层注入）+ localProxy($params) 钩子与 do=proxy 分发（五元组契约直出，空图透明 GIF 兜底写法见壳内代理指南）。php 源代理写法从此与其他引擎统一。已装旧版的用户：服务页「示例」重释放 t4_demo 壳文件后重启 T4-PHP 服务生效（自身已改过的 lib/spider.php 不覆盖，需手工合并）。",
          "category": "env"
       },
       {
