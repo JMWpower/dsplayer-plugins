@@ -2,7 +2,7 @@
   "logo": "icons/market.png",
   "name": "DsPlayer 官方插件市场",
   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-  "updatedAt": "2026-10-04T16:00:00Z",
+  "updatedAt": "2026-10-06T00:00:00Z",
   "plugins": [
     {
       "id": "mediaProxy",
@@ -61,18 +61,18 @@
       "id": "python",
       "name": "Python 运行时",
       "author": "hjdhnx",
-      "desc": "Python 3.12 运行时（musl 链接，Android arm64 独立进程）：插件卡「依赖管理」支持 pip 安装/卸载，musllinux wheel 的 C 扩展包（lxml/numpy 等）可直接安装免编译。「服务」页添加 Python T4 服务（Flask 或任意 pip 可装框架，fastapi 依赖 Rust 扩展无 musl wheel 不可用）。内置 Android DNS 解析 shim 与 CA 证书，示例源 examples/t4_demo.py。与「Python 爬虫引擎」APK 插件（id: py）互补：本包跑独立进程 HTTP 服务，APK 包做进程内爬虫源。",
-      "version": "1.0.1",
+      "desc": "Python 3.12 运行时（musl 链接，Android arm64 独立进程）：插件卡「依赖管理」支持 pip 安装/卸载，musllinux wheel 的 C 扩展包（lxml/numpy 等）可直接安装免编译；爬虫一键装九件套。「服务」页添加 Python T4 服务（Flask 或任意 pip 可装框架，fastapi 依赖 Rust 扩展无 musl wheel 不可用）。内置 DNS shim、CA 证书与可写目录适配。示例源 examples/t4_demo.py。与「Python 爬虫引擎」APK 插件（id: py）互补：本包跑独立进程 HTTP 服务，APK 包做进程内爬虫源。",
+      "version": "1.0.2",
       "type": "import",
-      "size": 23376747,
-      "url": "packages/python-1.0.1.zip",
+      "size": 23377205,
+      "url": "packages/python-1.0.2.zip",
       "icon": "icons/python.png",
       "tags": [
         "运行时",
         "服务"
       ],
-      "md5": "9d65095548f104536c773ec3689992b7",
-      "changelog": "v1.0.1：pip 平台标签修复——loader 显式调用形态下 packaging 探测不到 musl，musllinux wheel 全被跳过、C 扩展包（lxml/numpy）回落源码编译必败（表现为「下载完成但列表没有」）；sitecustomize 内置 patch 使 musllinux_1_2 标签正确生成，lxml 实测直装 musllinux wheel 免编译。v1.0.0 首发：CPython 3.12.15 musl + loader 显式调用形态；pip 依赖管理（清华/阿里/官方镜像）；DNS shim（公共 DNS 直连 + 网关兜底，Android 无 resolv.conf 场景）；T4 demo 预设服务（PyT4-demo，端口 5758）。",
+      "md5": "987031e828f3e812403cc0c6f9df78e4",
+      "changelog": "v1.0.2：鸿蒙 4.2 兼容两连修——①TMPDIR/HOME 显式注入到插件内可写目录（部分 ROM app 进程无 HOME 且无 /tmp，pip 下载/解包报 No usable temporary directory）；②musl 平台探测 spawn 失败防御（部分 ROM app 域 fork/exec 受限报 /lib/ld-musl-aarch64.so.1 ENOENT 整包装包失败，现失败一律回落伪造标签照常装 musllinux wheel）。v1.0.1：pip 平台标签修复（musllinux wheel 识别）。v1.0.0 首发。已装 1.0.0/1.0.1 的用户从市场更新后重试「爬虫一键装」即可。",
       "category": "env"
     },
     {
