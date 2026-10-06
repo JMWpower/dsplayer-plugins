@@ -1,308 +1,308 @@
 {
- "logo": "icons/market.png",
- "name": "DsPlayer 官方插件市场",
- "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
- "updatedAt": "2026-10-06T15:25:33Z",
- "plugins": [
-  {
-   "id": "mediaProxy",
-   "name": "媒体代理服务",
-   "author": "hjdhnx",
-   "desc": "Go 媒体代理服务（leader-follower 流式分段引擎，秒级起播，支持 Range/拖动）。以子进程方式运行，配置启动参数与环境变量后由宿主拉起。",
-   "version": "1.1.1",
-   "type": "import",
-   "size": 2034214,
-   "url": "packages/mediaProxy-1.1.1.zip",
-   "icon": "icons/mediaProxy.png",
-   "tags": [
-    "网络",
-    "服务"
-   ],
-   "changelog": "默认端口 57574 → 5575（新装生效；已装用户可在插件卡编辑参数改端口，二进制未变）。",
-   "md5": "3428e69c39decc435d0c3c5c212b5bd2",
-   "category": "env"
-  },
-  {
-   "id": "nodejs",
-   "name": "Node.js 运行时",
-   "author": "hjdhnx",
-   "desc": "Node.js 24 运行时（arm64 静态链接）。本身不启动服务，作为运行时供「服务」页引用：可同时拉起多个服务实例（如 drpy-node 源服务）。",
-   "version": "1.0.0",
-   "type": "import",
-   "size": 31400000,
-   "url": "packages/nodejs-1.0.0.zip",
-   "icon": "icons/nodejs.png",
-   "tags": [
-    "运行时",
-    "服务"
-   ],
-   "md5": "8eb71041327f883355a99e5c4a791388",
-   "category": "env"
-  },
-  {
-   "id": "php",
-   "name": "PHP 运行时",
-   "author": "hjdhnx",
-   "desc": "PHP 7 运行时（Android arm64 静态单文件，无动态库依赖）+ t4_demo 站点源种子（T4-PHP 预置导入时释放到 sdcard/dsplayer/server/php/t4_demo，docroot 指 sdcard 可加改源）。供「服务」页引用：drpys 的 php 桥（PHP_PATH）与 T4-PHP 站点服务均引用此包。覆盖安装替换旧 PHP 8 包，二者不共存。",
-   "version": "1.3.1",
-   "type": "import",
-   "size": 9731838,
-   "url": "packages/php-1.3.1.zip",
-   "icon": "icons/php.png",
-   "tags": [
-    "运行时",
-    "服务"
-   ],
-   "md5": "85cfbe54c329b9dd7c299aa2b3cda120",
-   "changelog": "v1.3.1：控制台页「已加载扩展」展开显示具体名单；t4_demo/php/ 定位修正——它是 web 服务脚本目录（自定义解析、IPTV 转发等），不再是源：不进 config.php 源列表，改为控制台首页单独列出各脚本服务地址。已装 1.3.0 的用户：服务页点「示例」升级壳文件后重启 T4-PHP 服务生效。",
-   "category": "env"
-  },
-  {
-   "id": "python",
-   "name": "Python 运行时",
-   "author": "hjdhnx",
-   "desc": "Python 3.12 运行时（musl 链接，Android arm64 独立进程）：插件卡「依赖管理」支持 pip 安装/卸载，musllinux wheel 的 C 扩展包（lxml/numpy 等）可直接安装免编译；爬虫一键装九件套。「服务」页添加 Python T4 服务（Flask 或任意 pip 可装框架，fastapi 依赖 Rust 扩展无 musl wheel 不可用）。内置 DNS shim、CA 证书与可写目录适配。示例源 examples/t4_demo.py。与「Python 爬虫引擎」APK 插件（id: py）互补：本包跑独立进程 HTTP 服务，APK 包做进程内爬虫源。",
-   "version": "1.0.2",
-   "type": "import",
-   "size": 23377205,
-   "url": "packages/python-1.0.2.zip",
-   "icon": "icons/python.png",
-   "tags": [
-    "运行时",
-    "服务"
-   ],
-   "md5": "987031e828f3e812403cc0c6f9df78e4",
-   "changelog": "v1.0.2：鸿蒙 4.2 兼容两连修——①TMPDIR/HOME 显式注入到插件内可写目录（部分 ROM app 进程无 HOME 且无 /tmp，pip 下载/解包报 No usable temporary directory）；②musl 平台探测 spawn 失败防御（部分 ROM app 域 fork/exec 受限报 /lib/ld-musl-aarch64.so.1 ENOENT 整包装包失败，现失败一律回落伪造标签照常装 musllinux wheel）。v1.0.1：pip 平台标签修复（musllinux wheel 识别）。v1.0.0 首发。已装 1.0.0/1.0.1 的用户从市场更新后重试「爬虫一键装」即可。",
-   "category": "env"
-  },
-  {
-   "id": "py",
-   "name": "Python 爬虫引擎",
-   "author": "hjdhnx",
-   "desc": "本地 Python 爬虫源执行引擎（Chaquopy）：type=3 的 .py 源自动进入点播源列表。运行时组件必须以 APK 形态安装，安装时跳转系统安装器并需「安装未知应用」授权。",
-   "version": "1.1.4",
-   "type": "apk",
-   "size": 17036516,
-   "url": "packages/DsPlayer-Python-plugin-1.1.4-arm64.apk",
-   "icon": "icons/py.png",
-   "tags": [
-    "引擎"
-   ],
-   "md5": "83cd008f096fe96058289565bdd444eb",
-   "changelog": "1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 代码片段，stdout/stderr 捕获进 envelope 全量走 fd 二通道（无 Binder 1MB 上限），work_dir 进 sys.path[0] 并临时 chdir（同目录模块可 import），base.spider/pip 预装包与源加载同环境可用；脚本内给 _result 赋值 → 控制台 ⇒ 行显示。配套本体「编程调试」页（我的页→编程调试：workspace 工作区 js/php/py 运行沙盒）。旧本体不受影响（新事务码仅新本体调用）。1.1.3 存储读权限修复不变。",
-   "category": "env"
-  },
-  {
-   "id": "mpv",
-   "name": "MPV 播放内核",
-   "author": "hjdhnx",
-   "desc": "提供全功能 MPV 内核（v1.2.6）：新增 DASH（MPD）原生播放支持、超分 shader、截图、广协议支持。导入后以应用内组件形态生效，可在「插件」页切换播放内核。",
-   "version": "1.0.2",
-   "type": "import",
-   "size": 8144995,
-   "url": "packages/mpv-1.0.2.apk",
-   "icon": "icons/mpv.png",
-   "tags": [
-    "内核"
-   ],
-   "md5": "24db35c6c48be264a7561c5b0d8c1695",
-   "category": "env",
-   "changelog": "v1.0.2：libmpv 重编入 DASH（MPD）demuxer —— 上游构建缺 libxml2 致 ff_dash_demuxer 未编入，DASH 源此前须降级 Exo；现 MPV 原生播放，真机首帧 39ms。内核版本 1.2.5 → 1.2.6。"
-  },
-  {
-   "id": "ijk",
-   "name": "IJK 播放内核",
-   "author": "hjdhnx",
-   "desc": "IJKPlayer 播放内核插件（CarGuo 修正版 ijkplayer，FFmpeg 全协议 + MediaCodec 硬解 + HTTPS/16K page size）。安装后在设置「播放器内核」或播放器底栏切换 IJK；与 Exo/MPV 三内核任切。桥接式插件（必须 APK 安装，不支持 zip 导入）。",
-   "version": "1.0.1",
-   "type": "apk",
-   "size": 4143184,
-   "url": "packages/ijk-1.0.1.apk",
-   "icon": "icons/ijk.png",
-   "tags": [
-    "内核"
-   ],
-   "md5": "e5b771ad6a4eb93379bc48d82b747cd8",
-   "category": "env",
-   "changelog": "UA 透传修复：IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达；真机 mgtv 源三内核验收通过。"
-  },
-  {
-   "id": "qjs",
-   "name": "QJS 爬虫引擎",
-   "author": "hjdhnx",
-   "desc": "本地 JS 爬虫源执行引擎（自研 QuickJS + C 扩展核心）：drpy2（type=3 的 .js 源与 sdcard spider/js 本地源）与 drpy3 新源（声明式/wasm 形态，sdcard spider/dr3）统一由本插件执行——drpy3 源不再需要单独的 fjs 插件。",
-   "version": "1.0.5",
-   "type": "import",
-   "size": 3109106,
-   "url": "packages/qjs-1.0.5.apk",
-   "icon": "icons/qjs.png",
-   "tags": [
-    "引擎"
-   ],
-   "md5": "3edbcac19014867f501168e4f267284a",
-   "category": "env",
-   "changelog": "qjs_update_stack_top：isolate 线程迁移假 stack overflow 根治（dr3 引擎 worker 化前提；顺带根治 dr2 偶发假爆栈）。需 DsPlayer 0.7.6+ 配合。"
-  },
-  {
-   "id": "agent",
-   "name": "AI 助手界面",
-   "author": "hjdhnx",
-   "desc": "AI 助手对话界面（NextChat v2.15.8 静态包）：经本地网关托管，支持「写脚本→本地执行→自检修正」闭环与壳子自动化控制（换源/播放/切台等，MCP 同款工具）。1.1.0：升级 NextChat v2.12.4→v2.15.8；新增 injectCompat 注入兼容声明。需在设置「AI」页配置模型接口。",
-   "version": "1.1.0",
-   "type": "import",
-   "size": 3893291,
-   "url": "packages/agent-1.1.0.apk",
-   "icon": "icons/agent.png",
-   "tags": [
-    "界面",
-    "AI"
-   ],
-   "md5": "b64f152c2b1e5ff4e4813555e149bf1f",
-   "category": "env"
-  },
-  {
-   "id": "bundle",
-   "name": "插件整合包",
-   "author": "hjdhnx",
-   "desc": "全家桶安装器（有桌面图标，一键安装）：内置 MPV/Python/QJS/Agent 四插件 APK + mediaProxy/php 运行时 zip。版本预检：设备已装版本 ≥ 内置版本则跳过，仅补缺口/升级落后项，可与单包共存。",
-   "version": "1.1.0",
-   "type": "apk",
-   "size": 56940233,
-   "url": "packages/bundle-1.1.0.apk",
-   "icon": "icons/bundle.png",
-   "tags": [
-    "安装器",
-    "整合包"
-   ],
-   "md5": "666f8affd6ffe1a156a55715a2a6ecac",
-   "changelog": "移除 fjs 子插件（drpy3 换核 qjs_ultra，qjs 子插件升 1.0.2 承接 drpy3 源）；全家桶现为 MPV/Python/QJS/Agent 四插件。",
-   "category": "app"
-  },
-  {
-   "id": "iptv-ccsh",
-   "name": "IPTV 直播源（CCSH 采集）",
-   "author": "CCSH/IPTV",
-   "desc": "CCSH/IPTV 仓库全自动采集的央卫视+地方台直播源（每日 04:00 更新，含台标）。数据来源：https://github.com/CCSH/IPTV （MIT）。安装后写入直播配置，切到直播页即生效；频道台标随 m3u tvg-logo 自动加载。直连不可达时包内已用 gh-proxy.com 代理地址，可在源管理编辑。",
-   "version": "1.1.0",
-   "type": "live",
-   "category": "app",
-   "url": "packages/iptv-ccsh-1.1.0.json",
-   "size": 385,
-   "md5": "3d94c518d4797b07bfcb362d17dfe072",
-   "changelog": "v1.1.0：GitHub 加速代理失效修复——ghfast.top 节点已不可用，全量/精简/EPG 三处地址切换为 gh-proxy.com（与客户端默认代理一致）。已装用户在插件市场点更新即可；手动装过旧版的可在源管理自行替换地址。",
-   "tags": [
-    "直播",
-    "应用"
-   ],
-   "icon": "icons/iptv2.png"
-  },
-  {
-   "id": "lx-sync",
-   "name": "洛雪同步",
-   "author": "XCQ0607",
-   "desc": "洛雪音乐同步服务端 v2.1.0（来源 github.com/XCQ0607/lxserver releases，上游 lyswhut/lx-music-sync-server）：歌单/歌词多端同步 + Web 控制台。安装后解压至 sdcard/dsplayer/server/node/ 并自动创建「洛雪同步」服务（需先装 nodejs 运行时插件），启动后浏览器访问 http://<设备IP>:9527 进控制台（默认管理密码 123456，配置在 data/config.js 可改端口/用户）。已为 Android 打补丁：音乐标签写入依赖的桌面预编译库降级为占位实现，不影响同步核心。",
-   "version": "2.1.2",
-   "type": "server",
-   "category": "app",
-   "url": "packages/lx-sync-2.1.2.zip",
-   "size": 25286914,
-   "md5": "caaa2aa3c8e13d1bd27f55093d64d61c",
-   "changelog": "v2.1.2：真机启动修复——archiver v8 为 ESM 包，在 node24 require(esm) 链上基类 undefined 致启动崩溃，降级为 CJS stub（WebDAV 备份/文件管理器打包下载不可用，同步核心不受影响）。",
-   "tags": [
-    "服务",
-    "应用"
-   ],
-   "icon": "icons/lxmusic.png"
-  },
-  {
-   "id": "danmu-api",
-   "name": "弹幕 API 服务",
-   "author": "huangxd-",
-   "desc": "LogVar 弹幕 API 服务端 v1.0.0（来源 github.com/huangxd-/danmu_api commit ea88a15a）：兼容弹弹play 协议的弹幕聚合接口，直连爱优腾芒哔咪等平台取弹幕。安装后自动创建「弹幕 API」服务（需 nodejs 运行时插件），启动后在 设置→播放器 把弹幕接口改为 http://127.0.0.1:9321 即可自动匹配弹幕；浏览器访问 http://<设备IP>:9321 可搜索调试。另监听 5321 代理端口；已裁剪桌面专用依赖（pglite/drizzle 等），配置热重载在 Android 上不可用。",
-   "version": "1.0.0",
-   "type": "server",
-   "category": "app",
-   "url": "packages/danmu-1.0.0.zip",
-   "size": 6639589,
-   "md5": "6b60b7502edcfacf368529d8381ab221",
-   "changelog": "首个版本：基于上游 commit ea88a15a（2026-09-13），精简依赖 + 裁剪桌面专用死重（pglite/drizzle-orm/web-streams ~62MB），Android node24 实测启动/搜索/弹幕获取全链可用。",
-   "tags": [
-    "服务",
-    "应用"
-   ],
-   "icon": "icons/danmu.png"
-  },
-  {
-   "id": "demo-sources",
-   "name": "演示源包",
-   "author": "hjdhnx",
-   "desc": "本地源码集合包（应用类）：整包按 DsPlayer 目录树解压——源文件落 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见；支持携 server/ 等配套目录。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集+文本直通预览）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
-   "version": "1.1.7",
-   "type": "source",
-   "category": "app",
-   "url": "packages/demo-sources-1.1.7.zip",
-   "size": 1108575,
-   "md5": "db5e4606291973d165e5ab8b33b91d11",
-   "changelog": "1.1.7：「资源管理」裸本地路径播放根修——m3u/txt/json/db 列表文件里未带协议头的 sdcard 绝对路径（如 /storage/emulated/0/Music/xxx.mp3）此前会原样漏进播放链：宿主本地轨判定依赖 file:// 头，裸路径被当在线轨致播放失败，且不进音频接管（无歌词/海报/music:// 前缀）。现于播放入口统一补 file:// 头（置于全部解码形态之后，b64u 包装的坏名路径同样覆盖），补头后音频自动进音乐接管（歌词+海报），本地音乐/视频/打开文件全链路均可正常播放；带协议头与网络直链行为零变化（9 组断言含 m3u 全链路验证）。 1.1.6：「资源管理」txt/m3u/磁力列表解析护栏重做——原 txt 5000 条选集硬顶、5 万行读取上限与 m3u 5 万行截断删除，改为顶部常量 MAX_PARSE_ITEMS=1000000 行统一护栏（m3u 约 50w 台 / txt 约 100w 条，实测 30w 条选集壳子可渲染），超大列表完整解析不再莫名截断，触顶记日志；超限阈值源文件顶部可调。 1.1.5：「资源管理」坏字节文件名加固——部分设备（鸿蒙反馈）根目录报「加载失败: 'utf-8' codec can't encode characters ... surrogates not allowed」（其他分类正常），根因是存储中存在非 UTF-8 字节文件名（Windows 打包 zip 解压/老应用写入的 GBK 名）。本次全链容错：日志 print 容错、b64 编解码无损往返、坏名路径 vod_id 自动 b64u 包装（可正常点开详情）、显示名 GBK 启发式还原真中文、全部出口（列表/搜索/最近/详情/播放）可序列化。正常名行为零变化（19 组快照等价 + 坏名 18 断言验证）。坏名文件的缩略图与播放受宿主侧路径编码限制尽力而为，建议重命名根治。 1.1.4：包形态升级——整包按 dsplayer 目录树解压（根部 source.json target=dsplayer），源文件落位与旧版完全等价，并为源包携带 server/ 配套目录铺路；**需新版 DsPlayer 本体**（旧版本体会把包内 spider/ 平铺成 spider/spider/ 致源扫不到）。 1.1.3：「资源管理」源加 assets:// 图标（logo 指向壳子内置 app 图标，随包分发不依赖外链，需新版 DsPlayer 本体）。1.1.2：「资源管理」源码重构——冗余收敛净减 308 行（构造器单点化/六胞胎收集与16 处单条响应合并/JSON 直播源双份解析合并），功能与行为零变化（等价性冒烟 19 组快照逐字段比对通过）。1.1.1：直播列表乱码根修 + 拉取 10s 总预算。1.1.0：文本类文件直通预览（需新版 DsPlayer 本体）。",
-   "tags": [
-    "本地源",
-    "应用"
-   ],
-   "icon": "icons/demo-sources.png"
-  },
-  {
-   "id": "ffmpeg",
-   "name": "FFmpeg 软解",
-   "author": "hjdhnx",
-   "desc": "Exo 内核的 FFmpeg 音视频软解兜底（FongMi media3 fork 版 decoder_ffmpeg：libffmpegJNI + FFmpeg 9.0）：AC3/EAC3/DTS 全家/TrueHD/Atmos 音轨、AV1/AVS2/AVS3/Dolby Vision 视频等硬解不支持的格式自动回落软解，硬解支持仍走硬解。安装后播放自动生效，可在插件页停用。需本体 v0.6.2+（media3 切换 fork 版后生效），apk 直装。",
-   "version": "1.0.2",
-   "type": "apk",
-   "size": 13025897,
-   "url": "packages/ffmpeg-1.0.2.apk",
-   "icon": "icons/ffmpeg.png",
-   "tags": [
-    "解码"
-   ],
-   "md5": "3090df5f17641ff30d0f35e59fb51a2d",
-   "category": "env",
-   "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。"
-  },
-  {
-   "id": "idmplus",
-   "name": "IDM+ 下载器（1DM+）",
-   "author": "inventiv",
-   "desc": "Android 多线程下载管理器（1DM+/IDM+ 18.2 CN 汉化版，独立桌面应用）：多线程分段加速、断点续传、剪贴板/浏览器嗅探抓取媒体直链，适合大文件与视频下载。与 DsPlayer 无进程耦合，纯第三方应用直装（声明 pkg 包名，可感知系统侧卸载）。大体积包走 GitHub Release 资产分发，客户端经加速代理拉取后跳系统安装器安装。",
-   "version": "18.2",
-   "type": "apk",
-   "category": "app",
-   "pkg": "idm.internet.download.manager.plus",
-   "size": 56815021,
-   "url": "https://github.com/hjdhnx/dsplayer-plugin/releases/download/idmplus-18.2/idmplus-18.2-CN.apk",
-   "icon": "icons/idmplus.png",
-   "tags": [
-    "下载",
-    "应用"
-   ],
-   "md5": "eaa6a2e119ffb38acb4ff44e4e92247e",
-   "changelog": "首录：IDM+ 18.2（versionCode 30249）CN 汉化版。包体 54MB，超出 packages/ 常规体量，首个走 GitHub Release 分发的条目（绝对 URL 直链，客户端 GitHub 加速代理兼容已验证）。"
-  },
-  {
-   "id": "catlib",
-   "name": "catLib 引擎库包",
-   "author": "hjdhnx",
-   "desc": "qjs 引擎 assets:// 库目录协议的库文件（应用类源码包）：cat 生态源 import 'assets://js/lib/<file>' 的库目录分发（cat.js/cheerio/crypto-js/mod/sortName/similarity/http/spider 共 8 文件，上游 hjdhnx/drpy-node spider/catLib）。安装后落 sdcard/dsplayer/catLib/，qjs 引擎自动识别 assets:// 导入并实时加载，装完即生效无需重启。不打进 APK/插件包（零壳子体积），需新版 DsPlayer 本体（60377e6 起）配合。",
-   "version": "1.0.0",
-   "type": "source",
-   "category": "app",
-   "url": "packages/catlib-1.0.0.zip",
-   "size": 303536,
-   "md5": "56c71207b80b44b675644e04bb88058a",
-   "changelog": "1.0.0：首发——qjs 引擎 assets:// 库目录协议配套库包（cat 生态 catLib 8 文件），源 import assets://js/lib/<file> 由引擎映射到 dsplayer/catLib/<file> 实时加载；bytecode 缓存自动生效。需新版 DsPlayer 本体配合（旧版本体装本包无副作用但引擎不识别 assets://）。",
-   "tags": [
-    "引擎库",
-    "应用"
-   ],
-   "icon": "icons/catlib.png"
-  }
- ]
+   "logo": "icons/market.png",
+   "name": "DsPlayer 官方插件市场",
+   "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
+   "updatedAt": "2026-10-07T05:25:00Z",
+   "plugins": [
+      {
+         "id": "mediaProxy",
+         "name": "媒体代理服务",
+         "author": "hjdhnx",
+         "desc": "Go 媒体代理服务（leader-follower 流式分段引擎，秒级起播，支持 Range/拖动）。以子进程方式运行，配置启动参数与环境变量后由宿主拉起。",
+         "version": "1.1.1",
+         "type": "import",
+         "size": 2034214,
+         "url": "packages/mediaProxy-1.1.1.zip",
+         "icon": "icons/mediaProxy.png",
+         "tags": [
+            "网络",
+            "服务"
+         ],
+         "changelog": "默认端口 57574 → 5575（新装生效；已装用户可在插件卡编辑参数改端口，二进制未变）。",
+         "md5": "3428e69c39decc435d0c3c5c212b5bd2",
+         "category": "env"
+      },
+      {
+         "id": "nodejs",
+         "name": "Node.js 运行时",
+         "author": "hjdhnx",
+         "desc": "Node.js 24 运行时（arm64 静态链接）。本身不启动服务，作为运行时供「服务」页引用：可同时拉起多个服务实例（如 drpy-node 源服务）。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 31400000,
+         "url": "packages/nodejs-1.0.0.zip",
+         "icon": "icons/nodejs.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "md5": "8eb71041327f883355a99e5c4a791388",
+         "category": "env"
+      },
+      {
+         "id": "php",
+         "name": "PHP 运行时",
+         "author": "hjdhnx",
+         "desc": "PHP 7 运行时（Android arm64 静态单文件，无动态库依赖）+ t4_demo 站点源种子（T4-PHP 预置导入时释放到 sdcard/dsplayer/server/php/t4_demo，docroot 指 sdcard 可加改源）。供「服务」页引用：drpys 的 php 桥（PHP_PATH）与 T4-PHP 站点服务均引用此包。覆盖安装替换旧 PHP 8 包，二者不共存。",
+         "version": "1.3.1",
+         "type": "import",
+         "size": 9731838,
+         "url": "packages/php-1.3.1.zip",
+         "icon": "icons/php.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "md5": "85cfbe54c329b9dd7c299aa2b3cda120",
+         "changelog": "v1.3.1：控制台页「已加载扩展」展开显示具体名单；t4_demo/php/ 定位修正——它是 web 服务脚本目录（自定义解析、IPTV 转发等），不再是源：不进 config.php 源列表，改为控制台首页单独列出各脚本服务地址。已装 1.3.0 的用户：服务页点「示例」升级壳文件后重启 T4-PHP 服务生效。",
+         "category": "env"
+      },
+      {
+         "id": "python",
+         "name": "Python 运行时",
+         "author": "hjdhnx",
+         "desc": "Python 3.12 运行时（musl 链接，Android arm64 独立进程）：插件卡「依赖管理」支持 pip 安装/卸载，musllinux wheel 的 C 扩展包（lxml/numpy 等）可直接安装免编译；爬虫一键装九件套。「服务」页添加 Python T4 服务（Flask 或任意 pip 可装框架，fastapi 依赖 Rust 扩展无 musl wheel 不可用）。内置 DNS shim、CA 证书与可写目录适配。示例源 examples/t4_demo.py。与「Python 爬虫引擎」APK 插件（id: py）互补：本包跑独立进程 HTTP 服务，APK 包做进程内爬虫源。",
+         "version": "1.0.2",
+         "type": "import",
+         "size": 23377205,
+         "url": "packages/python-1.0.2.zip",
+         "icon": "icons/python.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "md5": "987031e828f3e812403cc0c6f9df78e4",
+         "changelog": "v1.0.2：鸿蒙 4.2 兼容两连修——①TMPDIR/HOME 显式注入到插件内可写目录（部分 ROM app 进程无 HOME 且无 /tmp，pip 下载/解包报 No usable temporary directory）；②musl 平台探测 spawn 失败防御（部分 ROM app 域 fork/exec 受限报 /lib/ld-musl-aarch64.so.1 ENOENT 整包装包失败，现失败一律回落伪造标签照常装 musllinux wheel）。v1.0.1：pip 平台标签修复（musllinux wheel 识别）。v1.0.0 首发。已装 1.0.0/1.0.1 的用户从市场更新后重试「爬虫一键装」即可。",
+         "category": "env"
+      },
+      {
+         "id": "py",
+         "name": "Python 爬虫引擎",
+         "author": "hjdhnx",
+         "desc": "本地 Python 爬虫源执行引擎（Chaquopy）：type=3 的 .py 源自动进入点播源列表。运行时组件必须以 APK 形态安装，安装时跳转系统安装器并需「安装未知应用」授权。",
+         "version": "1.1.4",
+         "type": "apk",
+         "size": 17036516,
+         "url": "packages/DsPlayer-Python-plugin-1.1.4-arm64.apk",
+         "icon": "icons/py.png",
+         "tags": [
+            "引擎"
+         ],
+         "md5": "83cd008f096fe96058289565bdd444eb",
+         "changelog": "1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 代码片段，stdout/stderr 捕获进 envelope 全量走 fd 二通道（无 Binder 1MB 上限），work_dir 进 sys.path[0] 并临时 chdir（同目录模块可 import），base.spider/pip 预装包与源加载同环境可用；脚本内给 _result 赋值 → 控制台 ⇒ 行显示。配套本体「编程调试」页（我的页→编程调试：workspace 工作区 js/php/py 运行沙盒）。旧本体不受影响（新事务码仅新本体调用）。1.1.3 存储读权限修复不变。",
+         "category": "env"
+      },
+      {
+         "id": "mpv",
+         "name": "MPV 播放内核",
+         "author": "hjdhnx",
+         "desc": "提供全功能 MPV 内核（v1.2.6）：新增 DASH（MPD）原生播放支持、超分 shader、截图、广协议支持。导入后以应用内组件形态生效，可在「插件」页切换播放内核。",
+         "version": "1.0.2",
+         "type": "import",
+         "size": 8144995,
+         "url": "packages/mpv-1.0.2.apk",
+         "icon": "icons/mpv.png",
+         "tags": [
+            "内核"
+         ],
+         "md5": "24db35c6c48be264a7561c5b0d8c1695",
+         "category": "env",
+         "changelog": "v1.0.2：libmpv 重编入 DASH（MPD）demuxer —— 上游构建缺 libxml2 致 ff_dash_demuxer 未编入，DASH 源此前须降级 Exo；现 MPV 原生播放，真机首帧 39ms。内核版本 1.2.5 → 1.2.6。"
+      },
+      {
+         "id": "ijk",
+         "name": "IJK 播放内核",
+         "author": "hjdhnx",
+         "desc": "IJKPlayer 播放内核插件（CarGuo 修正版 ijkplayer，FFmpeg 全协议 + MediaCodec 硬解 + HTTPS/16K page size）。安装后在设置「播放器内核」或播放器底栏切换 IJK；与 Exo/MPV 三内核任切。桥接式插件（必须 APK 安装，不支持 zip 导入）。",
+         "version": "1.0.2",
+         "type": "apk",
+         "size": 4143300,
+         "url": "packages/ijk-1.0.2.apk",
+         "icon": "icons/ijk.png",
+         "tags": [
+            "内核"
+         ],
+         "md5": "3f257329fbd9de8095963e2fe5a99fdc",
+         "category": "env",
+         "changelog": "v1.0.2：直播协议白名单修复——桥 options 透传 FORMAT 类 setOption，protocol_whitelist 注入放行 rtmp/rtmps/rtsp/srt（ffmpeg 编译白名单默认不含，rtmp 频道此前报 Protocol not on whitelist 黑屏；ijkplayer Java 层 setDataSource 对 rtmp 强写默认白名单，注入须在其后覆盖——真机 mediaMTX 彩条流三内核验收通过）。升本体配合：直播 rtmp 频道 Exo 缺省自动切 MPV/IJK。"
+      },
+      {
+         "id": "qjs",
+         "name": "QJS 爬虫引擎",
+         "author": "hjdhnx",
+         "desc": "本地 JS 爬虫源执行引擎（自研 QuickJS + C 扩展核心）：drpy2（type=3 的 .js 源与 sdcard spider/js 本地源）与 drpy3 新源（声明式/wasm 形态，sdcard spider/dr3）统一由本插件执行——drpy3 源不再需要单独的 fjs 插件。",
+         "version": "1.0.5",
+         "type": "import",
+         "size": 3109106,
+         "url": "packages/qjs-1.0.5.apk",
+         "icon": "icons/qjs.png",
+         "tags": [
+            "引擎"
+         ],
+         "md5": "3edbcac19014867f501168e4f267284a",
+         "category": "env",
+         "changelog": "qjs_update_stack_top：isolate 线程迁移假 stack overflow 根治（dr3 引擎 worker 化前提；顺带根治 dr2 偶发假爆栈）。需 DsPlayer 0.7.6+ 配合。"
+      },
+      {
+         "id": "agent",
+         "name": "AI 助手界面",
+         "author": "hjdhnx",
+         "desc": "AI 助手对话界面（NextChat v2.15.8 静态包）：经本地网关托管，支持「写脚本→本地执行→自检修正」闭环与壳子自动化控制（换源/播放/切台等，MCP 同款工具）。1.1.0：升级 NextChat v2.12.4→v2.15.8；新增 injectCompat 注入兼容声明。需在设置「AI」页配置模型接口。",
+         "version": "1.1.0",
+         "type": "import",
+         "size": 3893291,
+         "url": "packages/agent-1.1.0.apk",
+         "icon": "icons/agent.png",
+         "tags": [
+            "界面",
+            "AI"
+         ],
+         "md5": "b64f152c2b1e5ff4e4813555e149bf1f",
+         "category": "env"
+      },
+      {
+         "id": "bundle",
+         "name": "插件整合包",
+         "author": "hjdhnx",
+         "desc": "全家桶安装器（有桌面图标，一键安装）：内置 MPV/Python/QJS/Agent 四插件 APK + mediaProxy/php 运行时 zip。版本预检：设备已装版本 ≥ 内置版本则跳过，仅补缺口/升级落后项，可与单包共存。",
+         "version": "1.1.0",
+         "type": "apk",
+         "size": 56940233,
+         "url": "packages/bundle-1.1.0.apk",
+         "icon": "icons/bundle.png",
+         "tags": [
+            "安装器",
+            "整合包"
+         ],
+         "md5": "666f8affd6ffe1a156a55715a2a6ecac",
+         "changelog": "移除 fjs 子插件（drpy3 换核 qjs_ultra，qjs 子插件升 1.0.2 承接 drpy3 源）；全家桶现为 MPV/Python/QJS/Agent 四插件。",
+         "category": "app"
+      },
+      {
+         "id": "iptv-ccsh",
+         "name": "IPTV 直播源（CCSH 采集）",
+         "author": "CCSH/IPTV",
+         "desc": "CCSH/IPTV 仓库全自动采集的央卫视+地方台直播源（每日 04:00 更新，含台标）。数据来源：https://github.com/CCSH/IPTV （MIT）。安装后写入直播配置，切到直播页即生效；频道台标随 m3u tvg-logo 自动加载。直连不可达时包内已用 gh-proxy.com 代理地址，可在源管理编辑。",
+         "version": "1.1.0",
+         "type": "live",
+         "category": "app",
+         "url": "packages/iptv-ccsh-1.1.0.json",
+         "size": 385,
+         "md5": "3d94c518d4797b07bfcb362d17dfe072",
+         "changelog": "v1.1.0：GitHub 加速代理失效修复——ghfast.top 节点已不可用，全量/精简/EPG 三处地址切换为 gh-proxy.com（与客户端默认代理一致）。已装用户在插件市场点更新即可；手动装过旧版的可在源管理自行替换地址。",
+         "tags": [
+            "直播",
+            "应用"
+         ],
+         "icon": "icons/iptv2.png"
+      },
+      {
+         "id": "lx-sync",
+         "name": "洛雪同步",
+         "author": "XCQ0607",
+         "desc": "洛雪音乐同步服务端 v2.1.0（来源 github.com/XCQ0607/lxserver releases，上游 lyswhut/lx-music-sync-server）：歌单/歌词多端同步 + Web 控制台。安装后解压至 sdcard/dsplayer/server/node/ 并自动创建「洛雪同步」服务（需先装 nodejs 运行时插件），启动后浏览器访问 http://<设备IP>:9527 进控制台（默认管理密码 123456，配置在 data/config.js 可改端口/用户）。已为 Android 打补丁：音乐标签写入依赖的桌面预编译库降级为占位实现，不影响同步核心。",
+         "version": "2.1.2",
+         "type": "server",
+         "category": "app",
+         "url": "packages/lx-sync-2.1.2.zip",
+         "size": 25286914,
+         "md5": "caaa2aa3c8e13d1bd27f55093d64d61c",
+         "changelog": "v2.1.2：真机启动修复——archiver v8 为 ESM 包，在 node24 require(esm) 链上基类 undefined 致启动崩溃，降级为 CJS stub（WebDAV 备份/文件管理器打包下载不可用，同步核心不受影响）。",
+         "tags": [
+            "服务",
+            "应用"
+         ],
+         "icon": "icons/lxmusic.png"
+      },
+      {
+         "id": "danmu-api",
+         "name": "弹幕 API 服务",
+         "author": "huangxd-",
+         "desc": "LogVar 弹幕 API 服务端 v1.0.0（来源 github.com/huangxd-/danmu_api commit ea88a15a）：兼容弹弹play 协议的弹幕聚合接口，直连爱优腾芒哔咪等平台取弹幕。安装后自动创建「弹幕 API」服务（需 nodejs 运行时插件），启动后在 设置→播放器 把弹幕接口改为 http://127.0.0.1:9321 即可自动匹配弹幕；浏览器访问 http://<设备IP>:9321 可搜索调试。另监听 5321 代理端口；已裁剪桌面专用依赖（pglite/drizzle 等），配置热重载在 Android 上不可用。",
+         "version": "1.0.0",
+         "type": "server",
+         "category": "app",
+         "url": "packages/danmu-1.0.0.zip",
+         "size": 6639589,
+         "md5": "6b60b7502edcfacf368529d8381ab221",
+         "changelog": "首个版本：基于上游 commit ea88a15a（2026-09-13），精简依赖 + 裁剪桌面专用死重（pglite/drizzle-orm/web-streams ~62MB），Android node24 实测启动/搜索/弹幕获取全链可用。",
+         "tags": [
+            "服务",
+            "应用"
+         ],
+         "icon": "icons/danmu.png"
+      },
+      {
+         "id": "demo-sources",
+         "name": "演示源包",
+         "author": "hjdhnx",
+         "desc": "本地源码集合包（应用类）：整包按 DsPlayer 目录树解压——源文件落 sdcard/dsplayer/spider/，进入点播页对应本地源页自动扫描可见；支持携 server/ 等配套目录。含 dr2（百忙无果·官）、dr3（央视频/七星猫短剧/喜福短剧/奇奇影视/百忙无果）、hipy（abts 音频接管/资源管理·本地音乐歌词海报+直播合集+文本直通预览）、js（央视频cat/云游戏cat 及 _lib 依赖库）四类共 13 个文件。更新为整包覆盖式，不影响包外自装源。",
+         "version": "1.1.7",
+         "type": "source",
+         "category": "app",
+         "url": "packages/demo-sources-1.1.7.zip",
+         "size": 1108575,
+         "md5": "db5e4606291973d165e5ab8b33b91d11",
+         "changelog": "1.1.7：「资源管理」裸本地路径播放根修——m3u/txt/json/db 列表文件里未带协议头的 sdcard 绝对路径（如 /storage/emulated/0/Music/xxx.mp3）此前会原样漏进播放链：宿主本地轨判定依赖 file:// 头，裸路径被当在线轨致播放失败，且不进音频接管（无歌词/海报/music:// 前缀）。现于播放入口统一补 file:// 头（置于全部解码形态之后，b64u 包装的坏名路径同样覆盖），补头后音频自动进音乐接管（歌词+海报），本地音乐/视频/打开文件全链路均可正常播放；带协议头与网络直链行为零变化（9 组断言含 m3u 全链路验证）。 1.1.6：「资源管理」txt/m3u/磁力列表解析护栏重做——原 txt 5000 条选集硬顶、5 万行读取上限与 m3u 5 万行截断删除，改为顶部常量 MAX_PARSE_ITEMS=1000000 行统一护栏（m3u 约 50w 台 / txt 约 100w 条，实测 30w 条选集壳子可渲染），超大列表完整解析不再莫名截断，触顶记日志；超限阈值源文件顶部可调。 1.1.5：「资源管理」坏字节文件名加固——部分设备（鸿蒙反馈）根目录报「加载失败: 'utf-8' codec can't encode characters ... surrogates not allowed」（其他分类正常），根因是存储中存在非 UTF-8 字节文件名（Windows 打包 zip 解压/老应用写入的 GBK 名）。本次全链容错：日志 print 容错、b64 编解码无损往返、坏名路径 vod_id 自动 b64u 包装（可正常点开详情）、显示名 GBK 启发式还原真中文、全部出口（列表/搜索/最近/详情/播放）可序列化。正常名行为零变化（19 组快照等价 + 坏名 18 断言验证）。坏名文件的缩略图与播放受宿主侧路径编码限制尽力而为，建议重命名根治。 1.1.4：包形态升级——整包按 dsplayer 目录树解压（根部 source.json target=dsplayer），源文件落位与旧版完全等价，并为源包携带 server/ 配套目录铺路；**需新版 DsPlayer 本体**（旧版本体会把包内 spider/ 平铺成 spider/spider/ 致源扫不到）。 1.1.3：「资源管理」源加 assets:// 图标（logo 指向壳子内置 app 图标，随包分发不依赖外链，需新版 DsPlayer 本体）。1.1.2：「资源管理」源码重构——冗余收敛净减 308 行（构造器单点化/六胞胎收集与16 处单条响应合并/JSON 直播源双份解析合并），功能与行为零变化（等价性冒烟 19 组快照逐字段比对通过）。1.1.1：直播列表乱码根修 + 拉取 10s 总预算。1.1.0：文本类文件直通预览（需新版 DsPlayer 本体）。",
+         "tags": [
+            "本地源",
+            "应用"
+         ],
+         "icon": "icons/demo-sources.png"
+      },
+      {
+         "id": "ffmpeg",
+         "name": "FFmpeg 软解",
+         "author": "hjdhnx",
+         "desc": "Exo 内核的 FFmpeg 音视频软解兜底（FongMi media3 fork 版 decoder_ffmpeg：libffmpegJNI + FFmpeg 9.0）：AC3/EAC3/DTS 全家/TrueHD/Atmos 音轨、AV1/AVS2/AVS3/Dolby Vision 视频等硬解不支持的格式自动回落软解，硬解支持仍走硬解。安装后播放自动生效，可在插件页停用。需本体 v0.6.2+（media3 切换 fork 版后生效），apk 直装。",
+         "version": "1.0.2",
+         "type": "apk",
+         "size": 13025897,
+         "url": "packages/ffmpeg-1.0.2.apk",
+         "icon": "icons/ffmpeg.png",
+         "tags": [
+            "解码"
+         ],
+         "md5": "3090df5f17641ff30d0f35e59fb51a2d",
+         "category": "env",
+         "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。"
+      },
+      {
+         "id": "idmplus",
+         "name": "IDM+ 下载器（1DM+）",
+         "author": "inventiv",
+         "desc": "Android 多线程下载管理器（1DM+/IDM+ 18.2 CN 汉化版，独立桌面应用）：多线程分段加速、断点续传、剪贴板/浏览器嗅探抓取媒体直链，适合大文件与视频下载。与 DsPlayer 无进程耦合，纯第三方应用直装（声明 pkg 包名，可感知系统侧卸载）。大体积包走 GitHub Release 资产分发，客户端经加速代理拉取后跳系统安装器安装。",
+         "version": "18.2",
+         "type": "apk",
+         "category": "app",
+         "pkg": "idm.internet.download.manager.plus",
+         "size": 56815021,
+         "url": "https://github.com/hjdhnx/dsplayer-plugin/releases/download/idmplus-18.2/idmplus-18.2-CN.apk",
+         "icon": "icons/idmplus.png",
+         "tags": [
+            "下载",
+            "应用"
+         ],
+         "md5": "eaa6a2e119ffb38acb4ff44e4e92247e",
+         "changelog": "首录：IDM+ 18.2（versionCode 30249）CN 汉化版。包体 54MB，超出 packages/ 常规体量，首个走 GitHub Release 分发的条目（绝对 URL 直链，客户端 GitHub 加速代理兼容已验证）。"
+      },
+      {
+         "id": "catlib",
+         "name": "catLib 引擎库包",
+         "author": "hjdhnx",
+         "desc": "qjs 引擎 assets:// 库目录协议的库文件（应用类源码包）：cat 生态源 import 'assets://js/lib/<file>' 的库目录分发（cat.js/cheerio/crypto-js/mod/sortName/similarity/http/spider 共 8 文件，上游 hjdhnx/drpy-node spider/catLib）。安装后落 sdcard/dsplayer/catLib/，qjs 引擎自动识别 assets:// 导入并实时加载，装完即生效无需重启。不打进 APK/插件包（零壳子体积），需新版 DsPlayer 本体（60377e6 起）配合。",
+         "version": "1.0.0",
+         "type": "source",
+         "category": "app",
+         "url": "packages/catlib-1.0.0.zip",
+         "size": 303536,
+         "md5": "56c71207b80b44b675644e04bb88058a",
+         "changelog": "1.0.0：首发——qjs 引擎 assets:// 库目录协议配套库包（cat 生态 catLib 8 文件），源 import assets://js/lib/<file> 由引擎映射到 dsplayer/catLib/<file> 实时加载；bytecode 缓存自动生效。需新版 DsPlayer 本体配合（旧版本体装本包无副作用但引擎不识别 assets://）。",
+         "tags": [
+            "引擎库",
+            "应用"
+         ],
+         "icon": "icons/catlib.png"
+      }
+   ]
 }
