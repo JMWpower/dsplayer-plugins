@@ -2,47 +2,48 @@
 
 DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装入口），`packages/` 存放插件包，`icons/` 存放条目图标。
 
-## 当前收录（19 个条目 = 环境 13 + 应用 6）
+## 当前收录（21 个条目 = 环境 14 + 应用 7）
 
 条目带 `category` 字段（2026-09-20 起）：`env`=环境（引擎/运行时，给壳子供能力，默认归类）；`app`=应用（面向完整使用场景：整合包、直播源包、服务包）。市场内按类别过滤，默认展示「环境」。
 
-条目可选 `platforms` 字段（词表 `android`/`win32`，缺省视为不限平台）：Android 专属的 import zip 条目（binaries 仅声明 android 的）必标 `["android"]`，防 PC 用户下载后 validate 才失败；win32 运行时包标 `["win32"]` 且必须设 `minApp`（承载 PC 插件支持的最低本体版本——旧版本体不识 platforms 字段，minApp 让按钮置灰「需升级」而非下载后失败）。包内适配以 plugin.json 的 binaries 平台键终判。
+**platforms 规范（2026-10-10 起，官方仓铁律，check_market.py 闸门强制）**：全量条目显式声明 `platforms`，零缺省（缺省=不限平台的语义仅为三方市场兼容保留）。词表 `android`/`win32`（预留 `linux`）。二进制形态条目（import/apk）**恰好一个平台词**——一个条目一个平台、包内只含该平台二进制（禁多合一合包，跨平台插件拆 `-win` 独立条目、版本独立线）；数据类条目（live/server/source）无二进制，标全平台组合 `["android","win32"]`，新平台加入时按此账本补标。win32 条目必须设 `minApp`（承载 PC 插件支持的最低本体版本）。包内适配以 plugin.json 的 binaries 平台键终判。发版前先跑 `python check_market.py`，六项全 PASS 才允许 commit（README 条目表↔market.json↔packages/ 一致性由它保证，不靠人肉）。
 
 ### 环境（env）
 
 | 条目 | id | 版本 | type | 包 |
 |---|---|---|---|---|
-| 媒体代理服务 | `mediaProxy` | 1.2.1 | import（zip；platforms=android+win32） | `packages/mediaProxy-1.2.1.zip` |
+| 媒体代理服务 | `mediaProxy` | 1.2.2 | import（zip；platforms=android） | `packages/mediaProxy-1.2.2.zip` |
+| 媒体代理服务（Windows） | `mediaProxy-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/mediaProxy-win-1.0.0.zip` |
 | Node.js 运行时 | `nodejs` | 1.0.0 | import（zip；platforms=android） | `packages/nodejs-1.0.0.zip` |
 | Node.js 运行时（Windows） | `nodejs-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/nodejs-win-1.0.0.zip` |
 | PHP 运行时 | `php` | 1.3.2 | import（zip；platforms=android） | `packages/php-1.3.2.zip` |
 | PHP 运行时（Windows） | `php-win` | 1.0.1 | import（zip；platforms=win32，minApp 0.9.4） | `packages/php-win-1.0.1.zip` |
-| Python 运行时 | `php-win` | 1.0.1 | PHP 8.5.11 官方 NTS win-x64（vs17）发行版整包入 bin/（sha256 对官方对账），binaries.win32 = bin/php.exe。**1.0.1 补 t4_demo 演示站种子**（35 文件，与 Android php-1.3.2 包同源）——1.0.0 漏带致 PC 端 T4-PHP 示例报「工作目录不存在」；更新后在服务页重点「示例」即释放。依赖 VC++ Redistributable（vs17，未装时 php.exe 起不来）。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键） |
-| `python` | 1.0.2 | import（zip；platforms=android） | `packages/python-1.0.2.zip` |
+| Python 运行时 | `python` | 1.0.2 | import（zip；platforms=android） | `packages/python-1.0.2.zip` |
 | Python 运行时（Windows） | `python-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/python-win-1.0.0.zip` |
-| Python 爬虫引擎 | `py` | 1.1.4 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.4-arm64.apk` |
-| MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
-| IJK 播放内核 | `ijk` | 1.0.2 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.2.apk` |
-| FFmpeg 软解 | `ffmpeg` | 1.0.2 | **apk**（系统安装；需本体 v0.6.2+） | `packages/ffmpeg-1.0.2.apk` |
-| QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.5 | import | `packages/qjs-1.0.5.apk` |
-| AI 助手界面 | `agent` | 1.1.0 | import | `packages/agent-1.1.0.apk` |
+| Python 爬虫引擎 | `py` | 1.1.4 | **apk**（系统安装；platforms=android） | `packages/DsPlayer-Python-plugin-1.1.4-arm64.apk` |
+| MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入；platforms=android） | `packages/mpv-1.0.2.apk` |
+| IJK 播放内核 | `ijk` | 1.0.2 | **apk**（桥接式必须系统安装；platforms=android） | `packages/ijk-1.0.2.apk` |
+| FFmpeg 软解 | `ffmpeg` | 1.0.2 | **apk**（系统安装；需本体 v0.6.2+；platforms=android） | `packages/ffmpeg-1.0.2.apk` |
+| QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.5 | import（platforms=android） | `packages/qjs-1.0.5.apk` |
+| AI 助手界面 | `agent` | 1.1.0 | import（platforms=android） | `packages/agent-1.1.0.apk` |
 
 ### 应用（app）
 
 | 条目 | id | 版本 | type | 包 |
 |---|---|---|---|---|
-| 插件整合包 | `bundle` | 1.1.0 | **apk**（系统安装） | `packages/bundle-1.1.0.apk` |
-| IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包） | `packages/iptv-ccsh-1.1.0.json` |
-| 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包） | `packages/lx-sync-2.1.2.zip` |
-| 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包） | `packages/danmu-1.0.0.zip` |
-| 演示源包 | `demo-sources` | 1.1.7 | **source**（源码包） | `packages/demo-sources-1.1.7.zip` |
-| catLib 引擎库包 | `catlib` | 1.0.0 | **source**（源码包；引擎库） | `packages/catlib-1.0.0.zip` |
-| IDM+ 下载器（1DM+） | `idmplus` | 18.2 | **apk**（系统安装；Release 分发） | `releases/download/idmplus-18.2/idmplus-18.2-CN.apk` |
+| 插件整合包 | `bundle` | 1.1.0 | **apk**（系统安装；platforms=android） | `packages/bundle-1.1.0.apk` |
+| IPTV 直播源（CCSH 采集） | `iptv-ccsh` | 1.1.0 | **live**（直播源包；platforms=android+win32） | `packages/iptv-ccsh-1.1.0.json` |
+| 洛雪同步 | `lx-sync` | 2.1.2 | **server**（服务包；platforms=android+win32） | `packages/lx-sync-2.1.2.zip` |
+| 弹幕 API 服务 | `danmu-api` | 1.0.0 | **server**（服务包；platforms=android+win32） | `packages/danmu-1.0.0.zip` |
+| 演示源包 | `demo-sources` | 1.1.7 | **source**（源码包；platforms=android+win32） | `packages/demo-sources-1.1.7.zip` |
+| catLib 引擎库包 | `catlib` | 1.0.0 | **source**（源码包；引擎库；platforms=android+win32） | `packages/catlib-1.0.0.zip` |
+| IDM+ 下载器（1DM+） | `idmplus` | 18.2 | **apk**（系统安装；Release 分发；platforms=android） | `idmplus-18.2-CN.apk` |
 
 ### 引擎类条目版本要点
 
 | 条目 | 当前版本 | 要点 |
 |---|---|---|
+| `mediaProxy` | 1.2.2 | **1.2.2 单平台拆包（MARKET-PLATFORM-ADAPT）**：双平台合包按平台拆为两个独立条目——`mediaProxy` 只面向 Android（1.2.2，包内仅 ELF，与 1.2.1 二进制同源同 md5，瘦身约 2.4MB）+ 新条目 `mediaProxy-win`（1.0.0 起独立版本线，包内仅 PE）。已装 1.2.1 合包的 Windows 用户不做自动迁移（已装豁免显示，装新卸旧自定）。此前 1.2.1 纠正 1.2.0 win 二进制误用旧源构建（win/android 同源同引擎 leader-follower 流式分段） |
 | `php` | 1.3.2 | 1.3.2 t4_demo BaseSpider 代理统一：`getProxyUrl()` 拿本源代理基址（php -S 通道 run() 自感知自身脚本 `?do=proxy&` 端点；drpyS 桥通道接服务层 env 注入）+ `localProxy($params)` 钩子与 `do=proxy` 分发（五元组契约直出，空图透明 GIF 兜底）——php 源代理写法与其他引擎统一，配套壳内《源本地代理指南》。已装旧版：服务页「示例」重释放 t4_demo 壳文件后重启 T4-PHP 服务生效（自带 lib/spider.php 改过的不覆盖）。drpyS 侧配套改动在 drpy-node 仓（_bridge.php env 注入 + php.js methodMapping） |
 | `python` | 1.0.2 | CPython 3.12.15（musl）独立进程运行时，对齐 nodejs/php 服务形态。插件卡专属「依赖管理」（pip 装卸/刷新/搜索/二次确认）+「爬虫一键装」九件套。**1.0.2 鸿蒙 4.2 兼容两连修**：TMPDIR/HOME 注入插件内可写目录（部分 ROM 无 HOME 无 /tmp，pip 报 No usable temporary directory）；musl 平台探测 spawn 失败防御（部分 ROM fork/exec 受限报 /lib/ld-musl ENOENT 整包失败，现回落伪造标签照常装 musllinux wheel）。1.0.1 pip 平台标签修复（musllinux wheel 识别，lxml/pycryptodome 等 C 扩展免编译直装）。内置 DNS shim + CA + py.sh wrapper。需 DsPlayer 0.8.5+。fastapi 不可用（pydantic-core 无 musl wheel），Flask/标准库可用 |
 | `mpv` | 1.0.2 | libmpv 重编入 DASH（MPD）demuxer（上游构建缺 libxml2 致 `ff_dash_demuxer` 未编入，DASH 源此前须降级 Exo）；内核 1.2.5 → 1.2.6 |
@@ -105,12 +106,13 @@ GitHub 直连不畅时，任选其一（DsPlayer 内「管理市场 → GitHub �
 | `category` | | `env`（默认）/ `app`；未声明归 env |
 | `icon` | | 图标地址（绝对 URL 或相对本索引的路径），未声明回落首字母占位 |
 | `size` / `author` / `desc` / `tags` / `changelog` | | 展示元数据 |
-| `md5` | | 包校验和（32 位 hex）；**声明即强制校验**，不符拒装防篡改。官方 12 包全量声明，可用 `md5sum packages/<包名>` 复核 |
+| `md5` | | 包校验和（32 位 hex）；**声明即强制校验**，不符拒装防篡改。官方仓全量声明，本地包可用 `md5sum packages/<包名>` 复核 |
 | `minApp` | | 可选；要求的最低 DsPlayer 版本，不满足时安装按钮置灰 |
 | `pkg` | | 可选；**type=apk 专属**——应用包名。声明后客户端走通用包探测判定已安装（第三方插件零壳子改动接入的关键：不在 DsPlayer 内置插件注册表的 apk 条目必须声明，否则市场 UI 恒判「未安装」） |
 
 ## 发布约定（2026-09-20 起执行）
 
+0. **发版闸门**：commit 前先跑 `python check_market.py`，六项全 PASS 才允许发布（退出码非零=拒绝）；红项即待修清单。
 1. **同名包绝不重传**：内容有任何变化一律升版本号并换新文件名（如 `lx-sync-2.1.2.zip`），代理/CDN 层对同名文件的缓存会导致客户端「md5 校验不符」假失败（lx-sync 实锤）。旧版本包删除（git 历史留档）。
 2. `md5` / `size` / `version` / `changelog` 与包严格同步；顶层 `updatedAt` 每次发布刷新。
 3. `server` 条目包内 `server.json` 为安装指令，DsPlayer 安装时跳过落盘；`live` 条目包体即数据。

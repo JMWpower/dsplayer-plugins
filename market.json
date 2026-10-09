@@ -2,28 +2,49 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-09T09:54:39Z",
+   "updatedAt": "2026-10-09T12:10:38Z",
    "plugins": [
       {
          "id": "mediaProxy",
          "name": "媒体代理服务",
          "author": "hjdhnx",
          "desc": "Go 媒体代理服务（leader-follower 流式分段引擎，秒级起播，支持 Range/拖动）。以子进程方式运行，配置启动参数与环境变量后由宿主拉起。",
-         "version": "1.2.1",
+         "version": "1.2.2",
          "type": "import",
-         "size": 4417908,
-         "url": "packages/mediaProxy-1.2.1.zip",
+         "size": 2034189,
+         "url": "packages/mediaProxy-1.2.2.zip",
          "icon": "icons/mediaProxy.png",
          "tags": [
             "网络",
             "服务"
          ],
-         "changelog": "v1.2.1：纠正 1.2.0——其 Windows 二进制误用另一处旧版源码（旧式单流分块实现）构建，现 win 与 android 同源同引擎（leader-follower 流式分段引擎，取官方配套仓 build/ 已验证产物）；Android 二进制与此前完全相同。此前 v1.2.0：新增 Windows x64 支持，Android 用户升级无感（二进制未变）。默认端口 5575（插件卡可改）。",
-         "md5": "a2e36833989b4ec504b8f943b3b00669",
+         "changelog": "v1.2.2：单平台拆包——本条目改为只面向 Android，包内仅含 Android 二进制（与 1.2.1 完全相同，同源同 md5），瘦身约 2.4MB；Windows 用户请安装新条目「媒体代理服务（Windows）」（mediaProxy-win）。已装 1.2.1 的 Android 用户常规更新即可，二进制与行为零变化。",
+         "md5": "cd20bd32fb9e7b2c41cb6a82872fce7d",
          "platforms": [
-            "android",
+            "android"
+         ],
+         "category": "env"
+      },
+      {
+         "id": "mediaProxy-win",
+         "name": "媒体代理服务（Windows）",
+         "author": "hjdhnx",
+         "desc": "Go 媒体代理服务（leader-follower 流式分段引擎，秒级起播，支持 Range/拖动）。以子进程方式运行，配置启动参数与环境变量后由宿主拉起。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 2384189,
+         "url": "packages/mediaProxy-win-1.0.0.zip",
+         "icon": "icons/mediaProxy.png",
+         "tags": [
+            "网络",
+            "服务"
+         ],
+         "changelog": "首发：从 mediaProxy 1.2.1 合包拆出的 Windows 独立条目——win 二进制与 1.2.1 完全相同（同源同 md5），包内不再携带 Android 二进制。此前在 PC 已装 1.2.1 合包的可继续使用（已装条目豁免显示），换装本条目与否自行决定，不做自动迁移。默认端口 5575（插件卡可改）。",
+         "md5": "ca204b4ae69bb9e66fd84d550a5fdb24",
+         "platforms": [
             "win32"
          ],
+         "minApp": "0.9.4",
          "category": "env"
       },
       {
@@ -169,7 +190,10 @@
          ],
          "md5": "83cd008f096fe96058289565bdd444eb",
          "changelog": "1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 代码片段，stdout/stderr 捕获进 envelope 全量走 fd 二通道（无 Binder 1MB 上限），work_dir 进 sys.path[0] 并临时 chdir（同目录模块可 import），base.spider/pip 预装包与源加载同环境可用；脚本内给 _result 赋值 → 控制台 ⇒ 行显示。配套本体「编程调试」页（我的页→编程调试：workspace 工作区 js/php/py 运行沙盒）。旧本体不受影响（新事务码仅新本体调用）。1.1.3 存储读权限修复不变。",
-         "category": "env"
+         "category": "env",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "mpv",
@@ -186,7 +210,10 @@
          ],
          "md5": "24db35c6c48be264a7561c5b0d8c1695",
          "category": "env",
-         "changelog": "v1.0.2：libmpv 重编入 DASH（MPD）demuxer —— 上游构建缺 libxml2 致 ff_dash_demuxer 未编入，DASH 源此前须降级 Exo；现 MPV 原生播放，真机首帧 39ms。内核版本 1.2.5 → 1.2.6。"
+         "changelog": "v1.0.2：libmpv 重编入 DASH（MPD）demuxer —— 上游构建缺 libxml2 致 ff_dash_demuxer 未编入，DASH 源此前须降级 Exo；现 MPV 原生播放，真机首帧 39ms。内核版本 1.2.5 → 1.2.6。",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "ijk",
@@ -203,7 +230,10 @@
          ],
          "md5": "3f257329fbd9de8095963e2fe5a99fdc",
          "category": "env",
-         "changelog": "v1.0.2：直播协议白名单修复——桥 options 透传 FORMAT 类 setOption，protocol_whitelist 注入放行 rtmp/rtmps/rtsp/srt（ffmpeg 编译白名单默认不含，rtmp 频道此前报 Protocol not on whitelist 黑屏；ijkplayer Java 层 setDataSource 对 rtmp 强写默认白名单，注入须在其后覆盖——真机 mediaMTX 彩条流三内核验收通过）。升本体配合：直播 rtmp 频道 Exo 缺省自动切 MPV/IJK。"
+         "changelog": "v1.0.2：直播协议白名单修复——桥 options 透传 FORMAT 类 setOption，protocol_whitelist 注入放行 rtmp/rtmps/rtsp/srt（ffmpeg 编译白名单默认不含，rtmp 频道此前报 Protocol not on whitelist 黑屏；ijkplayer Java 层 setDataSource 对 rtmp 强写默认白名单，注入须在其后覆盖——真机 mediaMTX 彩条流三内核验收通过）。升本体配合：直播 rtmp 频道 Exo 缺省自动切 MPV/IJK。",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "qjs",
@@ -220,7 +250,10 @@
          ],
          "md5": "3edbcac19014867f501168e4f267284a",
          "category": "env",
-         "changelog": "qjs_update_stack_top：isolate 线程迁移假 stack overflow 根治（dr3 引擎 worker 化前提；顺带根治 dr2 偶发假爆栈）。需 DsPlayer 0.7.6+ 配合。"
+         "changelog": "qjs_update_stack_top：isolate 线程迁移假 stack overflow 根治（dr3 引擎 worker 化前提；顺带根治 dr2 偶发假爆栈）。需 DsPlayer 0.7.6+ 配合。",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "agent",
@@ -237,7 +270,10 @@
             "AI"
          ],
          "md5": "b64f152c2b1e5ff4e4813555e149bf1f",
-         "category": "env"
+         "category": "env",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "bundle",
@@ -255,7 +291,10 @@
          ],
          "md5": "666f8affd6ffe1a156a55715a2a6ecac",
          "changelog": "移除 fjs 子插件（drpy3 换核 qjs_ultra，qjs 子插件升 1.0.2 承接 drpy3 源）；全家桶现为 MPV/Python/QJS/Agent 四插件。",
-         "category": "app"
+         "category": "app",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "iptv-ccsh",
@@ -273,7 +312,11 @@
             "直播",
             "应用"
          ],
-         "icon": "icons/iptv2.png"
+         "icon": "icons/iptv2.png",
+         "platforms": [
+            "android",
+            "win32"
+         ]
       },
       {
          "id": "lx-sync",
@@ -291,7 +334,11 @@
             "服务",
             "应用"
          ],
-         "icon": "icons/lxmusic.png"
+         "icon": "icons/lxmusic.png",
+         "platforms": [
+            "android",
+            "win32"
+         ]
       },
       {
          "id": "danmu-api",
@@ -309,7 +356,11 @@
             "服务",
             "应用"
          ],
-         "icon": "icons/danmu.png"
+         "icon": "icons/danmu.png",
+         "platforms": [
+            "android",
+            "win32"
+         ]
       },
       {
          "id": "demo-sources",
@@ -327,7 +378,11 @@
             "本地源",
             "应用"
          ],
-         "icon": "icons/demo-sources.png"
+         "icon": "icons/demo-sources.png",
+         "platforms": [
+            "android",
+            "win32"
+         ]
       },
       {
          "id": "ffmpeg",
@@ -344,7 +399,10 @@
          ],
          "md5": "3090df5f17641ff30d0f35e59fb51a2d",
          "category": "env",
-         "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。"
+         "changelog": "1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体 debug 包）；1.0.1 补载 libc++_shared.so 修复加载失败；1.0.0 首版。",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "idmplus",
@@ -363,7 +421,10 @@
             "应用"
          ],
          "md5": "eaa6a2e119ffb38acb4ff44e4e92247e",
-         "changelog": "首录：IDM+ 18.2（versionCode 30249）CN 汉化版。包体 54MB，超出 packages/ 常规体量，首个走 GitHub Release 分发的条目（绝对 URL 直链，客户端 GitHub 加速代理兼容已验证）。"
+         "changelog": "首录：IDM+ 18.2（versionCode 30249）CN 汉化版。包体 54MB，超出 packages/ 常规体量，首个走 GitHub Release 分发的条目（绝对 URL 直链，客户端 GitHub 加速代理兼容已验证）。",
+         "platforms": [
+            "android"
+         ]
       },
       {
          "id": "catlib",
@@ -381,7 +442,11 @@
             "引擎库",
             "应用"
          ],
-         "icon": "icons/catlib.png"
+         "icon": "icons/catlib.png",
+         "platforms": [
+            "android",
+            "win32"
+         ]
       }
    ]
 }
