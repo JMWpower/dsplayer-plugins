@@ -12,7 +12,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 
 | 条目 | id | 版本 | type | 包 |
 |---|---|---|---|---|
-| 媒体代理服务 | `mediaProxy` | 1.2.0 | import（zip；platforms=android+win32） | `packages/mediaProxy-1.2.0.zip` |
+| 媒体代理服务 | `mediaProxy` | 1.2.1 | import（zip；platforms=android+win32） | `packages/mediaProxy-1.2.1.zip` |
 | Node.js 运行时 | `nodejs` | 1.0.0 | import（zip；platforms=android） | `packages/nodejs-1.0.0.zip` |
 | Node.js 运行时（Windows） | `nodejs-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/nodejs-win-1.0.0.zip` |
 | PHP 运行时 | `php` | 1.3.2 | import（zip；platforms=android） | `packages/php-1.3.2.zip` |

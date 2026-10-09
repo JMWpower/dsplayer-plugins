@@ -2,24 +2,24 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-09T01:30:00Z",
+   "updatedAt": "2026-10-09T02:30:00Z",
    "plugins": [
       {
          "id": "mediaProxy",
          "name": "媒体代理服务",
          "author": "hjdhnx",
          "desc": "Go 媒体代理服务（leader-follower 流式分段引擎，秒级起播，支持 Range/拖动）。以子进程方式运行，配置启动参数与环境变量后由宿主拉起。",
-         "version": "1.2.0",
+         "version": "1.2.1",
          "type": "import",
-         "size": 5188404,
-         "url": "packages/mediaProxy-1.2.0.zip",
+         "size": 4417908,
+         "url": "packages/mediaProxy-1.2.1.zip",
          "icon": "icons/mediaProxy.png",
          "tags": [
             "网络",
             "服务"
          ],
-         "changelog": "v1.2.0：新增 Windows x64 二进制（bin/mediaProxy-win.exe，Go CGO_ENABLED=0 交叉编译，源码 4343823）——Android 二进制与 1.1.1 逐字节相同未变动，Android 用户升级无感。PC 端（DsPlayer 0.9.4+）插件页将出现 mediaProxy 卡，可配置启动参数起服务（默认 -port 5575）。此前 v1.1.1：默认端口 57574 → 5575（已装用户可在插件卡编辑参数改端口）。",
-         "md5": "def6f6ffaab13bae72731902999b2fa6",
+         "changelog": "v1.2.1：纠正 1.2.0——其 Windows 二进制误用另一处旧版源码（旧式单流分块实现）构建，现 win 与 android 同源同引擎（leader-follower 流式分段引擎，取官方配套仓 build/ 已验证产物）；Android 二进制与此前完全相同。此前 v1.2.0：新增 Windows x64 支持，Android 用户升级无感（二进制未变）。默认端口 5575（插件卡可改）。",
+         "md5": "a2e36833989b4ec504b8f943b3b00669",
          "platforms": [
             "android",
             "win32"
