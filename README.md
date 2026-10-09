@@ -16,8 +16,9 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | Node.js 运行时 | `nodejs` | 1.0.0 | import（zip；platforms=android） | `packages/nodejs-1.0.0.zip` |
 | Node.js 运行时（Windows） | `nodejs-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/nodejs-win-1.0.0.zip` |
 | PHP 运行时 | `php` | 1.3.2 | import（zip；platforms=android） | `packages/php-1.3.2.zip` |
-| PHP 运行时（Windows） | `php-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/php-win-1.0.0.zip` |
-| Python 运行时 | `python` | 1.0.2 | import（zip；platforms=android） | `packages/python-1.0.2.zip` |
+| PHP 运行时（Windows） | `php-win` | 1.0.1 | import（zip；platforms=win32，minApp 0.9.4） | `packages/php-win-1.0.1.zip` |
+| Python 运行时 | `php-win` | 1.0.1 | PHP 8.5.11 官方 NTS win-x64（vs17）发行版整包入 bin/（sha256 对官方对账），binaries.win32 = bin/php.exe。**1.0.1 补 t4_demo 演示站种子**（35 文件，与 Android php-1.3.2 包同源）——1.0.0 漏带致 PC 端 T4-PHP 示例报「工作目录不存在」；更新后在服务页重点「示例」即释放。依赖 VC++ Redistributable（vs17，未装时 php.exe 起不来）。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键） |
+| `python` | 1.0.2 | import（zip；platforms=android） | `packages/python-1.0.2.zip` |
 | Python 运行时（Windows） | `python-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/python-win-1.0.0.zip` |
 | Python 爬虫引擎 | `py` | 1.1.4 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.4-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
