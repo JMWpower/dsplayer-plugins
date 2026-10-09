@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-09T12:10:38Z",
+   "updatedAt": "2026-10-09T15:02:29Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -254,6 +254,27 @@
          "platforms": [
             "android"
          ]
+      },
+      {
+         "id": "qjs-win",
+         "name": "QJS 爬虫引擎（Windows）",
+         "author": "hjdhnx",
+         "desc": "quickjs_bridge.dll（Windows x64）——驱动 drpy2/drpy3/cat 三类 JS 源与编程调试 js 通道。自 0.9.5 起 release 本体不再内置引擎 dll，按需安装本插件；dll 与本体 Dart FFI 紧耦合，加载报符号缺失时请升级本体后重装。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 2728572,
+         "url": "packages/qjs-win-1.0.0.zip",
+         "icon": "icons/qjs.png",
+         "tags": [
+            "引擎"
+         ],
+         "changelog": "首发：与本体 vendored quickjs_bridge.dll 逐字节一致（qjs_ultra 同源）。需 DsPlayer 0.9.5+（native-lib 消费模式）。",
+         "md5": "74c4dbad0465ce900a41e9b1a188375a",
+         "platforms": [
+            "win32"
+         ],
+         "minApp": "0.9.5",
+         "category": "env"
       },
       {
          "id": "agent",

@@ -2,7 +2,7 @@
 
 DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装入口），`packages/` 存放插件包，`icons/` 存放条目图标。
 
-## 当前收录（21 个条目 = 环境 14 + 应用 7）
+## 当前收录（22 个条目 = 环境 15 + 应用 7）
 
 条目带 `category` 字段（2026-09-20 起）：`env`=环境（引擎/运行时，给壳子供能力，默认归类）；`app`=应用（面向完整使用场景：整合包、直播源包、服务包）。市场内按类别过滤，默认展示「环境」。
 
@@ -25,6 +25,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | IJK 播放内核 | `ijk` | 1.0.2 | **apk**（桥接式必须系统安装；platforms=android） | `packages/ijk-1.0.2.apk` |
 | FFmpeg 软解 | `ffmpeg` | 1.0.2 | **apk**（系统安装；需本体 v0.6.2+；platforms=android） | `packages/ffmpeg-1.0.2.apk` |
 | QJS 爬虫引擎（dr2 + dr3 源） | `qjs` | 1.0.5 | import（platforms=android） | `packages/qjs-1.0.5.apk` |
+| QJS 爬虫引擎（Windows） | `qjs-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.5） | `packages/qjs-win-1.0.0.zip` |
 | AI 助手界面 | `agent` | 1.1.0 | import（platforms=android） | `packages/agent-1.1.0.apk` |
 
 ### 应用（app）
@@ -49,6 +50,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | `mpv` | 1.0.2 | libmpv 重编入 DASH（MPD）demuxer（上游构建缺 libxml2 致 `ff_dash_demuxer` 未编入，DASH 源此前须降级 Exo）；内核 1.2.5 → 1.2.6 |
 | `py` | 1.1.4 | 1.1.4 新增编程调试 execCode 通道（AIDL 末尾追加，engine>=1.1.4）：执行任意 Python 片段，stdout/stderr 走 fd 二通道无 Binder 上限，work_dir 进 sys.path[0] 并临时 chdir，base.spider/pip 预装同源环境；`_result` 赋值 → 控制台 ⇒ 行。配套本体「编程调试」页；旧本体不受影响。1.1.3 恢复插件存储读权限（Manifest 此前仅 INTERNET）：文件浏览器式本地源（资源管理.py 等）在**插件进程**内列目录/读文件必需——无权限时对他人属主文件 stat 全 EACCES、目录恒 0 项；补 READ + MANAGE_EXTERNAL_STORAGE + requestLegacyExternalStorage（**仅读**，写删约束仍由 fs_guard + 无 WRITE 承载），装机后需授予「文件/存储」权限（应用详情→权限）。1.1.2 并发与自愈：同源长任务占锁 10s 快速报忙；源实例创建移出全局锁；修复 unloadSource 逐出通道静默空转；配套本体超时自动换实例 + 分发池 8 线程。1.1.1 修 BaseSpider 构造期崩溃（`__init__` 不再调用可被子类重写的 `self.log`，改模块级 `_log` 直调——hipy 源「资源管理」AttributeError 实锤，T3 官方基类对齐，上游 drpy-node 已同步修）。1.1.0 大响应 callBigFile 通道 + 抗杀保活开关（插件页 py 卡片，BIND_IMPORTANT，默认关） |同源长任务占锁时后续调用 10s 快速报忙（不再 30s 长队堆积）；源实例创建移出全局锁（新源首次加载不堵其他源）；修复 unloadSource 逐出通道自设计起静默空转；配套本体 v0.7.2+ debug（超时自动换实例 + 分发池 8 线程）后一个源失控不拖累其他源、失控源超时后秒级自愈。1.1.1 修 BaseSpider 构造期崩溃——`__init__` 不再调用可被子类重写的 `self.log`（改模块级 `_log` 直调）：源重写 log 且在 `super().__init__()` 之后才赋值其引用的属性时（hipy 源「资源管理」实锤 AttributeError），构造中断实例残废；T3 官方基类构造期不调 log，兼容性对齐，上游 drpy-node 已同步修。1.1.0 大响应 callBigFile 通道（AIDL 追加新方法，engine 1.1.0）+ 抗杀保活开关（插件页 py 卡片，BIND_IMPORTANT，默认关） |
 | `qjs` | 1.0.5 | so 升级（qjs_ultra build-20261001-975e55b）：**qjs_update_stack_top 根治 isolate 线程迁移假 stack overflow**——Dart isolate 迁移 OS 线程后栈基线失配，512MB 许可仍随机假爆（dr3 引擎 worker 化真机实锤，md5 级浅调用即触发；dr2 的 64MB 时代偶发假爆栈为同根因弱形态）。宿主每入口刷新基线（QuickjsEngine 执行链汇聚点），新增 1 导出（ABI 兼容旧宿主，exports.txt 已登记）。需 DsPlayer 0.7.6+（drpy3 引擎 worker 化版本）配合。此前 1.0.4 so 升级（qjs_ultra build-20260930-b221bd5）：**根修源码模式模块装载的随机假语法错误**——quickjs 契约要求 JS_Eval 输入以 NUL 结尾，此前缺终结符导致 lexer 读穿缓冲区把相邻堆字节当源码解析（dr3 源装载高频报 SyntaxError 的根因，DSPlayer 侧对照实验 15/30→0/30）。ABI 与 1.0.3 一致（66 导出闸门校验），旧本体兼容。此前 1.0.3 so 升级（cheerio 补齐 :gt/:lt 切片，选择器伪类 + 链式方法，外部贡献合入），drpy2/drpy3 源 HTML 解析选择器更全。ABI 与 1.0.2 一致（66 导出闸门校验），旧本体兼容。此前 1.0.2 drpy3 源运行时并入本插件（fjs 退役下架）+ 原生 WebAssembly（wasm3）+ 墙钟超时中断/结构化错误/值转换护栏；1.0.1 根治跨 isolate SIGABRT（回调 per-context 注册） |
+| `qjs-win` | 1.0.0 | 首发（PC 拆包 P1）：Windows 引擎 dll 市场化——0.9.5 起 release 本体不再内置 quickjs_bridge.dll（CMake 改 Debug-only），dr2/dr3/cat 源与编程调试 js 通道按需安装本插件（native-lib 消费模式，落 plugins/qjs-win/bin/）。dll 与本体 vendored 逐字节一致（qjs_ultra 同源） |
 | `bundle` | 1.1.0 | 移除 fjs 子插件（drpy3 并入 qjs 1.0.2），全家桶现为 MPV/Python/QJS/Agent 四插件；此前 1.0.9 agent 1.0.0→1.1.0（NextChat v2.15.8 + injectCompat） |
 | `ijk` | 1.0.1 | 1.0.0 首版（DexClassLoader 桥接，CarGuo 修正版 ijkplayer，HTTPS/16K page size）真机播放/切集/连播/三内核切换全通；1.0.1 修 UA 透传——IJK n4.3 的 headers 字典不生效到 HTTP 请求头（部分 CDN/防盗链源拒默认 UA 报 400），UA 改走 user_agent 协议级 option 直达；1.0.2 桥 options 透传 FORMAT 类 setOption + protocol_whitelist 注入放行 rtmp/rtmps/rtsp/srt（ffmpeg 编译白名单默认不含，rtmp 直播频道此前 Protocol not on whitelist 黑屏；注入须在 Java 层 setDataSource 强写默认之后覆盖）。**必须 APK 直装**（files zip 导入会丢 dex 致本体探测失效） |
 | `ffmpeg` | 1.0.2 | 1.0.2 修复软解画面纯色闪烁（Flutter SurfaceProducer 尺寸协商，需搭配最新本体）；1.0.1 补载 NDK C++ 运行时 libc++_shared.so（真机实锤：FongMi 编的 libavcodec 等动态依赖它，缺失时 dlopen 直接失败）；1.0.0 首版——FongMi/media fork（release-1.11.0-fongmi）编出的 decoder_ffmpeg so 载体：音频软解（AC3/EAC3/DTS 全家/TrueHD/Atmos 等）+ 视频软解（H.264/H.265/AV1/VP9/MPEG-4/AVS2/AVS3，Dolby Vision 基础层映射），为 Exo 内核补第三层解码兜底（硬解不支持自动回落，硬解可用时零开销）。**需本体 v0.6.2+**（media3 切 fork 版 + FfmpegDecoderLoader 加载链），**必须 APK 直装** |
