@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-09T15:02:29Z",
+   "updatedAt": "2026-10-09T16:26:10Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -214,6 +214,28 @@
          "platforms": [
             "android"
          ]
+      },
+      {
+         "id": "mpv-win",
+         "name": "MPV 内核（Windows）",
+         "author": "hjdhnx",
+         "desc": "libmpv-2.dll（Windows x64，mpv v0.41.0 + ffmpeg N-124868 + libplacebo v7.365）——PC 端 MPV 播放内核。自 0.9.5 起 release 本体不含 libmpv，按需安装本插件；缺省内核为 MDK（内置），MPV 为可选内核（画质增强/高级配置场景）。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 15497186,
+         "url": "packages/mpv-win-1.0.0.zip",
+         "icon": "icons/mpv.png",
+         "tags": [
+            "引擎",
+            "内核"
+         ],
+         "changelog": "首发：与历史内置 libmpv-2.dll 同源同字节（fork mpv-winbuild-cmake 20260607 构建，含 D3D11/NVDEC/Vulkan 硬解与 DASH/MPD 能力面）。需 DsPlayer 0.9.5+（native-lib 消费模式 + 延迟加载）。",
+         "md5": "f78d8e291750f3cc5b6da81bd95b1304",
+         "platforms": [
+            "win32"
+         ],
+         "minApp": "0.9.5",
+         "category": "env"
       },
       {
          "id": "ijk",
