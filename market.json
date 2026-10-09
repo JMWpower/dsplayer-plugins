@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-07T07:45:00Z",
+   "updatedAt": "2026-10-09T01:00:00Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -20,6 +20,9 @@
          ],
          "changelog": "默认端口 57574 → 5575（新装生效；已装用户可在插件卡编辑参数改端口，二进制未变）。",
          "md5": "3428e69c39decc435d0c3c5c212b5bd2",
+         "platforms": [
+            "android"
+         ],
          "category": "env"
       },
       {
@@ -37,6 +40,31 @@
             "服务"
          ],
          "md5": "8eb71041327f883355a99e5c4a791388",
+         "platforms": [
+            "android"
+         ],
+         "category": "env"
+      },
+      {
+         "id": "nodejs-win",
+         "name": "Node.js 运行时（Windows）",
+         "author": "hjdhnx",
+         "desc": "Node.js 24 运行时（Windows x64 官方发行版 v24.21.0 LTS，与 Android 侧 node24 同大版本，服务端行为一致）。本身不启动服务，作为运行时供「服务」页引用：drpys（drpyS 源服务）与编程调试 node 通道，可同时拉起多个服务实例。官方构建静态链接 CRT，无需 VC++ 运行库。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 39350476,
+         "url": "packages/nodejs-win-1.0.0.zip",
+         "icon": "icons/nodejs.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "changelog": "首发：Node.js v24.21.0 官方 win-x64 发行版整包（node.exe + npm），sha256 与官方 SHASUMS256.txt 对账一致。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键）。",
+         "md5": "61ecd54e0c4780be37ec3530d278ccd0",
+         "platforms": [
+            "win32"
+         ],
+         "minApp": "0.9.4",
          "category": "env"
       },
       {
@@ -55,6 +83,31 @@
          ],
          "md5": "92a4157b9418a4bdf1c5e7bad2c3306b",
          "changelog": "v1.3.2：t4_demo BaseSpider 代理统一——getProxyUrl() 拿本源代理基址（php -S 通道自感知自身脚本端点 ?do=proxy&，drpyS 桥通道接服务层注入）+ localProxy($params) 钩子与 do=proxy 分发（五元组契约直出，空图透明 GIF 兜底写法见壳内代理指南）。php 源代理写法从此与其他引擎统一。已装旧版的用户：服务页「示例」重释放 t4_demo 壳文件后重启 T4-PHP 服务生效（自身已改过的 lib/spider.php 不覆盖，需手工合并）。",
+         "platforms": [
+            "android"
+         ],
+         "category": "env"
+      },
+      {
+         "id": "php-win",
+         "name": "PHP 运行时（Windows）",
+         "author": "hjdhnx",
+         "desc": "PHP 8.5 运行时（Windows x64 官方 NTS 发行版，php -S 内置服务器场景无需线程安全版）：承载 T4-PHP 站点服务与 drpys 的 php 桥（PHP_PATH）。依赖 VC++ Redistributable（vs17）——未安装时 php.exe 无法启动，请先安装 Microsoft Visual C++ Redistributable。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 37153492,
+         "url": "packages/php-win-1.0.0.zip",
+         "icon": "icons/php.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "changelog": "首发：PHP 8.5.11 官方 NTS win-x64（vs17）发行版整包（php.exe + ext 扩展全家），sha256 与 windows.php.net 官方 sha256sum.txt 对账一致。注意依赖 VC++ 运行库（未装时服务起不来，失败文案会提示安装）。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键）。",
+         "md5": "16516ff44cac23d7031736a05d6b2b5a",
+         "platforms": [
+            "win32"
+         ],
+         "minApp": "0.9.4",
          "category": "env"
       },
       {
@@ -73,6 +126,31 @@
          ],
          "md5": "987031e828f3e812403cc0c6f9df78e4",
          "changelog": "v1.0.2：鸿蒙 4.2 兼容两连修——①TMPDIR/HOME 显式注入到插件内可写目录（部分 ROM app 进程无 HOME 且无 /tmp，pip 下载/解包报 No usable temporary directory）；②musl 平台探测 spawn 失败防御（部分 ROM app 域 fork/exec 受限报 /lib/ld-musl-aarch64.so.1 ENOENT 整包装包失败，现失败一律回落伪造标签照常装 musllinux wheel）。v1.0.1：pip 平台标签修复（musllinux wheel 识别）。v1.0.0 首发。已装 1.0.0/1.0.1 的用户从市场更新后重试「爬虫一键装」即可。",
+         "platforms": [
+            "android"
+         ],
+         "category": "env"
+      },
+      {
+         "id": "python-win",
+         "name": "Python 运行时（Windows）",
+         "author": "hjdhnx",
+         "desc": "Python 3.12 运行时（Windows x64 官方 embeddable 发行版 3.12.10 + 预置 pip 与爬虫依赖 requests/lxml/pycryptodome/pyquery/bs4/jsonpath/json5/jinja2/cachetools）：定位为 PyT4 服务、drpys 服务端（PYTHON_PATH）与编程调试通道；hipy 客户端源仅 Android，PC 请经 drpys 服务源使用 py 源。插件卡「依赖管理」支持 pip 安装/卸载（走 python -m pip）。",
+         "version": "1.0.0",
+         "type": "import",
+         "size": 27409616,
+         "url": "packages/python-win-1.0.0.zip",
+         "icon": "icons/python.png",
+         "tags": [
+            "运行时",
+            "服务"
+         ],
+         "changelog": "首发：Python 3.12.10 官方 embeddable amd64（3.12 分支末代带二进制的版本），md5 与 python.org 发版页对账一致；预置 pip + 爬虫九件套（阿里源）+ SSL 证书桥（pip/requests 联网开箱可用，内置 cacert.pem）。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键）。",
+         "md5": "35666906b5ef92da8c95b86118022d08",
+         "platforms": [
+            "win32"
+         ],
+         "minApp": "0.9.4",
          "category": "env"
       },
       {

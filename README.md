@@ -2,18 +2,23 @@
 
 DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装入口），`packages/` 存放插件包，`icons/` 存放条目图标。
 
-## 当前收录（16 个条目 = 环境 10 + 应用 6）
+## 当前收录（19 个条目 = 环境 13 + 应用 6）
 
 条目带 `category` 字段（2026-09-20 起）：`env`=环境（引擎/运行时，给壳子供能力，默认归类）；`app`=应用（面向完整使用场景：整合包、直播源包、服务包）。市场内按类别过滤，默认展示「环境」。
+
+条目可选 `platforms` 字段（词表 `android`/`win32`，缺省视为不限平台）：Android 专属的 import zip 条目（binaries 仅声明 android 的）必标 `["android"]`，防 PC 用户下载后 validate 才失败；win32 运行时包标 `["win32"]` 且必须设 `minApp`（承载 PC 插件支持的最低本体版本——旧版本体不识 platforms 字段，minApp 让按钮置灰「需升级」而非下载后失败）。包内适配以 plugin.json 的 binaries 平台键终判。
 
 ### 环境（env）
 
 | 条目 | id | 版本 | type | 包 |
 |---|---|---|---|---|
-| 媒体代理服务 | `mediaProxy` | 1.1.1 | import（zip） | `packages/mediaProxy-1.1.1.zip` |
-| Node.js 运行时 | `nodejs` | 1.0.0 | import（zip） | `packages/nodejs-1.0.0.zip` |
-| PHP 运行时 | `php` | 1.3.2 | import（zip） | `packages/php-1.3.2.zip` |
-| Python 运行时 | `python` | 1.0.2 | import（zip） | `packages/python-1.0.2.zip` |
+| 媒体代理服务 | `mediaProxy` | 1.1.1 | import（zip；platforms=android） | `packages/mediaProxy-1.1.1.zip` |
+| Node.js 运行时 | `nodejs` | 1.0.0 | import（zip；platforms=android） | `packages/nodejs-1.0.0.zip` |
+| Node.js 运行时（Windows） | `nodejs-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/nodejs-win-1.0.0.zip` |
+| PHP 运行时 | `php` | 1.3.2 | import（zip；platforms=android） | `packages/php-1.3.2.zip` |
+| PHP 运行时（Windows） | `php-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/php-win-1.0.0.zip` |
+| Python 运行时 | `python` | 1.0.2 | import（zip；platforms=android） | `packages/python-1.0.2.zip` |
+| Python 运行时（Windows） | `python-win` | 1.0.0 | import（zip；platforms=win32，minApp 0.9.4） | `packages/python-win-1.0.0.zip` |
 | Python 爬虫引擎 | `py` | 1.1.4 | **apk**（系统安装） | `packages/DsPlayer-Python-plugin-1.1.4-arm64.apk` |
 | MPV 播放内核 | `mpv` | 1.0.2 | import（apk 直装包可导入） | `packages/mpv-1.0.2.apk` |
 | IJK 播放内核 | `ijk` | 1.0.2 | **apk**（桥接式插件必须系统安装，不支持 zip 导入） | `packages/ijk-1.0.2.apk` |
