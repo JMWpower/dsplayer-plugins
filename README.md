@@ -40,6 +40,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | 演示源包 | `demo-sources` | 1.1.8 | **source**（源码包；platforms=android+win32） | `packages/demo-sources-1.1.8.zip` |
 | catLib 引擎库包 | `catlib` | 1.0.0 | **source**（源码包；引擎库；platforms=android+win32） | `packages/catlib-1.0.0.zip` |
 | IDM+ 下载器（1DM+） | `idmplus` | 18.2 | **apk**（系统安装；Release 分发；platforms=android） | `idmplus-18.2-CN.apk` |
+| MT管理器 | `mtmanager` | 2.14.5 | **apk**（系统安装；platforms=android） | `packages/mtmanager-2.14.5.apk` |
 
 ### 引擎类条目版本要点
 
@@ -68,7 +69,7 @@ DsPlayer 插件官方市场仓库：`market.json` 为市场索引（在线安装
 | type | 包体 | 安装动作 | 典型条目 |
 |---|---|---|---|
 | `import` | zip / apk | 应用内静默导入（组件落应用内目录） | 引擎/运行时类 |
-| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk、ffmpeg、idmplus |
+| `apk` | apk | 跳系统安装器直装 | py、bundle、ijk、ffmpeg、idmplus、mtmanager |
 | `live` | JSON（`{"lives":[{name,url,ua,epg}]}`） | 写入直播配置并启用，切直播页生效；**订阅制**（内容指向外部地址时随源自动更新） | iptv-ccsh |
 | `server` | zip（根部须有 `server.json` manifest：`serviceName/workDir/entry/port/healthType/desc`） | 解压到 `sdcard/dsplayer/server/node/`（覆盖式，数据目录保留）+ **自动创建服务配置**（nodejs 运行时启动；服务 id 约定 `svc-mkt-<条目id>`，已存在跳过） | lx-sync、danmu-api |
 | `source` | zip（根部可选 `source.json` manifest：`{"dirs":["dr3","js"]}` 目录白名单缺省全解压；`{"target":"dsplayer"}` = 包内路径即 dsplayer 目录树整体解压，`spider/`、`server/` 等可共存） | 缺省解压到 `sdcard/dsplayer/spider/`（顶层目录与本地源扫描目录 `dr2`/`dr3`/`hipy`/`js` 同名直落位）；target=dsplayer 按包内路径落 `sdcard/dsplayer/` 树。覆盖式不影响包外文件；进对应本地源页自动扫描入库；已装态存 App 安装记录（更新 = 市场版本对比后重装）。**zip 文件名必须 UTF-8 编码**（7-Zip 默认按本地代码页打包中文名会乱码，用 Python zipfile/UTF-8 工具打包） | demo-sources |

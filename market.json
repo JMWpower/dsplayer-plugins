@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-09T23:55:15Z",
+   "updatedAt": "2026-10-10T03:23:28Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -489,6 +489,28 @@
          "platforms": [
             "android",
             "win32"
+         ]
+      },
+      {
+         "id": "mtmanager",
+         "name": "MT管理器",
+         "author": "Bin",
+         "desc": "Android 强大的文件管理器 / APK 编辑器（2.14.5 克隆版，独立桌面应用）：文件与压缩包双向操作、APK 反编译编辑与签名、Dex/Arsc 编辑、XML 反编译、字体预览等。与 DsPlayer 无进程耦合，纯第三方应用直装（声明 pkg 包名，可感知系统侧卸载）。包名 bin.mt.plus.canary（克隆版），可与 MT 管理器官方正式版（bin.mt.plus）共存互不干扰。",
+         "version": "2.14.5",
+         "type": "apk",
+         "category": "app",
+         "pkg": "bin.mt.plus.canary",
+         "size": 26548891,
+         "url": "packages/mtmanager-2.14.5.apk",
+         "icon": "icons/mtmanager.png",
+         "tags": [
+            "工具",
+            "应用"
+         ],
+         "md5": "2503056464d8651e15e04ef6c58eabd1",
+         "changelog": "首录：MT 管理器 2.14.5（versionCode 24011893，versionName 2.14.5-clone 克隆版，包名 bin.mt.plus.canary）。全 ABI（arm64-v8a/armeabi-v7a/x86/x86_64），包体 26.5MB 走 packages/ 常规分发。",
+         "platforms": [
+            "android"
          ]
       }
    ]
