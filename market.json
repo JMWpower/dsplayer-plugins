@@ -2,7 +2,7 @@
    "logo": "icons/market.png",
    "name": "DsPlayer 官方插件市场",
    "desc": "官方维护的插件分发索引（docs/plugin/PLUGIN-MARKET-DESIGN.md §二 schema）",
-   "updatedAt": "2026-10-10T03:23:28Z",
+   "updatedAt": "2026-10-10T07:56:10Z",
    "plugins": [
       {
          "id": "mediaProxy",
@@ -157,18 +157,18 @@
          "id": "python-win",
          "name": "Python 运行时（Windows）",
          "author": "hjdhnx",
-         "desc": "Python 3.12 运行时（Windows x64 官方 embeddable 发行版 3.12.10 + 预置 pip 与爬虫依赖 requests/lxml/pycryptodome/pyquery/bs4/jsonpath/json5/jinja2/cachetools）：定位为 PyT4 服务、drpys 服务端（PYTHON_PATH）与编程调试通道；hipy 客户端源仅 Android，PC 请经 drpys 服务源使用 py 源。插件卡「依赖管理」支持 pip 安装/卸载（走 python -m pip）。",
-         "version": "1.0.0",
+         "desc": "Python 3.12 运行时（Windows x64 官方 embeddable 发行版 3.12.10 + 预置 pip 与爬虫依赖 requests/lxml/pycryptodome/pyquery/bs4/jsonpath/json5/jinja2/cachetools）：PC 端 hipy/py 源本地执行引擎（常驻 worker 复用移动端同款引擎，init 带缓存），兼作 PyT4 服务、drpys 服务端（PYTHON_PATH）与编程调试通道。插件卡「依赖管理」支持 pip 安装/卸载（走 python -m pip）。",
+         "version": "1.1.0",
          "type": "import",
-         "size": 27409616,
-         "url": "packages/python-win-1.0.0.zip",
+         "size": 27469355,
+         "url": "packages/python-win-1.1.0.zip",
          "icon": "icons/python.png",
          "tags": [
             "运行时",
             "服务"
          ],
-         "changelog": "首发：Python 3.12.10 官方 embeddable amd64（3.12 分支末代带二进制的版本），md5 与 python.org 发版页对账一致；预置 pip + 爬虫九件套（阿里源）+ SSL 证书桥（pip/requests 联网开箱可用，内置 cacert.pem）。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键）。",
-         "md5": "35666906b5ef92da8c95b86118022d08",
+         "changelog": "v1.1.0：新增 PC 端 py 源本地执行 worker——bin/py_worker_server.py 常驻 127.0.0.1 HTTP 服务，复用移动端 Chaquopy 插件同款引擎 manager.py（构建期拷入，md5 对账），init 后带缓存（实例 LRU）；DsPlayer 0.9.6+ 在 PC 上直接使用 py-online/py-local 源，不再需要 drpys 服务中转。v1.0.0：首发，Python 3.12.10 官方 embeddable amd64，md5 与 python.org 发版页对账一致；预置 pip + 爬虫九件套 + SSL 证书桥。需 DsPlayer 0.9.4+（PC 插件中心 + win32 平台键）。",
+         "md5": "13a67ee6e55ec422ee27686813da38c2",
          "platforms": [
             "win32"
          ],
